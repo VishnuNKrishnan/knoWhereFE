@@ -1,0 +1,75 @@
+.processStageDisplayWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.processStageDisplayHolder {
+  width: 500px;
+  height: 30px;
+  /* border: 2px solid white; */
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.processStageCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* border: 2px solid white; */
+}
+
+.processStageCard .processStageNumberHolder {
+  height: 30px;
+  min-width: 30px;
+  padding: 0 10px;
+  border-radius: 15px;
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.processStageCard .processStageNumberHolder p {
+  font-weight: 800;
+}
+
+.processStageDisplayHolder .rail {
+  position: absolute;
+  top: 14px;
+  height: 2px;
+  width: 100%;
+  background-color: white;
+  z-index: -1;
+}
+
+.processStageCard .done {
+  background-color: #4c5f24;
+  border: 2px solid #fff;
+}
+
+.processStageCard .done p {
+  color: white;
+}
+
+.processStageCard .current {
+  background-color: white;
+  border: 2px solid #4c5f24;
+}
+
+.processStageCard .current p {
+  color: #4c5f24;
+}
+
+.processStageCard .pending {
+  background-color: rgb(122, 122, 122);
+  border: 2px solid #fff;
+}
+
+.processStageCard .pending p {
+  color: #fff;
+}

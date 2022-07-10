@@ -1,0 +1,296 @@
+.dashboard_selectedVehicleOptionsWrapper {
+  height: 100%;
+  width: 100%;
+  /* border: 2px solid black; */
+  border-radius: 5px;
+  padding: 20px 15px 0 15px;
+  animation: dashboard_selectedVehicleOptionsWrapperLoadIn 0.2s 1 ease-in-out;
+}
+
+@keyframes dashboard_selectedVehicleOptionsWrapperLoadIn {
+  0% {
+    opacity: 0%;
+    transform: scale(85%);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(100%);
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper .sectionHeading {
+  margin: 0 0 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_selectedVehicleOptionsWrapper .sectionHeading h2 {
+  width: 400px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  background-color: rgba(240, 255, 255, 0.481);
+  backdrop-filter: blur(8px);
+  padding: 10px 20px;
+  position: relative;
+  top: -20px;
+  border-radius: 0 0 5px 5px;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper .sectionHeading h2 {
+    width: 100%;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper .sectionHeading img {
+  height: 40px;
+  margin-left: 15px;
+}
+
+.dashboard_selectedVehicleOptionsWrapper .contentContainer {
+  width: 100%;
+  /* border: 1px solid black; */
+}
+
+/* ------------ END OF COMMON ELEMENTS TO Dashboard_*.css Files */
+
+.dashboard_selectedVehicleOptionsWrapper .contentContainer .row1Container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row1Container
+  .dpContainer {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 5px solid rgba(240, 255, 255, 1);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper
+    .contentContainer
+    .row1Container
+    .dpContainer {
+    height: 125px;
+    width: 125px;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper .detailsHolder_wideScreen {
+  height: 150px;
+  width: 400px;
+  padding: 0 15px;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper .detailsHolder_wideScreen {
+    display: none;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper .detailsHolder_wideScreen p {
+  font-weight: 200;
+  color: #1f1f1f;
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row1Container
+  .CTAsHolder {
+  height: 175px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper
+    .contentContainer
+    .row1Container
+    .CTAsHolder {
+    height: 150px;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row1Container
+  .CTAsHolder
+  .btn {
+  width: 200px;
+  height: 50px;
+  /* border: 1px solid black; */
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row1Container
+  .CTAsHolder
+  .btn:active {
+  transform: scale(90%);
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper
+    .contentContainer
+    .row1Container
+    .CTAsHolder
+    .btn {
+    width: 175px;
+    height: 40px;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper .detailsHolder_mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper .detailsHolder_mobile {
+    margin-top: 15px;
+    height: 150px;
+    width: 100%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+}
+
+.row2Container .detailsHolder_mobile p {
+  font-weight: 200;
+  color: #000000;
+}
+
+.dashboard_selectedVehicleOptionsWrapper .contentContainer .row3Container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* border: 1px solid black; */
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper .contentContainer .row3Container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row3Container
+  .vehicleDetailsItemCard {
+  margin: 0 10px 10px 0;
+  width: 200px;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper
+    .contentContainer
+    .row3Container
+    .vehicleDetailsItemCard {
+    margin-right: 0;
+  }
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row3Container
+  .vehicleDetailsItemCard
+  p {
+  font-weight: 200;
+  color: #2b2b2b;
+}
+
+.dashboard_selectedVehicleOptionsWrapper
+  .contentContainer
+  .row3Container
+  .vehicleDetailsItemCard
+  h3 {
+  font-weight: 400;
+  color: #000000;
+}
+
+.primaryCTA {
+  background-color: #4c5f24;
+  border: 1px solid #39471b;
+  font-weight: 800;
+}
+
+.primaryCTA p {
+  color: #c6c9bf;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.secondaryCTA {
+  background-color: rgba(83, 83, 83, 0.382);
+  border: 1px solid #24242450;
+}
+
+.secondaryCTA p {
+  color: #2c2c2c;
+}
+
+.sectionSeparatorHolder {
+  margin: 30px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #c6c9bf; */
+}
+
+.sectionSeparatorHolder .sectionName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+}
+
+.sectionSeparatorHolder .sectionName p {
+  color: #3f3f3f;
+  letter-spacing: 3px;
+  font-size: 18px;
+}
+
+.sectionSeparatorHolder .separatorLine {
+  width: 100%;
+  height: 1px;
+  background-color: #3f3f3f;
+}

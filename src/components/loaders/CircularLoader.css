@@ -1,0 +1,18 @@
+.spinner {
+  height: 60px;
+  width: 60px;
+  border: 8px solid rgba(0, 0, 0, 0);
+  border-top: 8px solid #405e02;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  animation: spinDiv 1s infinite linear;
+}
+
+@keyframes spinDiv {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,48 @@
+.toggleSwitchHolder {
+  height: 28px;
+  width: 60px;
+  border-radius: 14px;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.504);
+  padding: 2px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.holder-false {
+  background-color: brown;
+}
+
+.holder-true {
+  background-color: #4c5f24;
+}
+
+.toggleSwitchHolder input {
+  display: none;
+}
+
+.toggleSwitchHolder .toggleSwitch {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.05s ease-in-out;
+}
+
+/* Toggle Switch ON (when props.isToggled = true) */
+.toggleSwitchHolder .true {
+  margin-left: 32px;
+}
+
+/* Toggle Switch OFF (when props.isToggled = false) */
+.toggleSwitchHolder .false {
+  margin-left: 0px;
+}
+
+.toggleSwitch .toggleSwitchLabel {
+  font-size: 10px;
+}

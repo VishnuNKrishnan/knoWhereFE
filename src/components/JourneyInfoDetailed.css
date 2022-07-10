@@ -1,0 +1,289 @@
+.journeyInfoDetailedContainer {
+  position: fixed;
+  right: 10px;
+  width: calc(100vw - 345px);
+  /* padding: 15px; */
+  border-radius: 5px;
+  background-color: rgba(240, 248, 255, 0.466);
+  box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+  transition: bottom, top 0.5s ease-in-out;
+  height: calc(100vh - 175px);
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 979px) {
+  .journeyInfoDetailedContainer {
+    width: calc(100vw - 20px);
+    border-radius: 5px;
+  }
+}
+
+.journeyInfoDetailedContainer .actionsHolder {
+  height: 75px !important;
+  width: 100%;
+  background-color: #405e02;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 10px 5px rgb(160, 160, 160);
+}
+
+@media only screen and (min-width: 980px) {
+  .journeyInfoDetailedContainer .actionsHolder {
+    display: none;
+  }
+}
+
+.journeyInfoDetailedContainer .brandingBar {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.brandingBar .brandingLogoHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.brandingBar .brandingLogoHolder span {
+  color: rgba(130, 130, 130, 0.77);
+}
+
+.brandingBar .brandLogo {
+  height: 20px;
+  opacity: 40%;
+}
+
+.brandingBar .journeyDetailsCloseBtn {
+  height: 35px;
+  opacity: 40%;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+.brandingBar .journeyDetailsCloseBtn:active {
+  transform: scale(70%);
+}
+
+@media only screen and (max-width: 979px) {
+  .journeyInfoDetailedContainer .brandingBar {
+    display: none;
+  }
+}
+
+.journeyInfoDetailedContainer .actionsHolder img {
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+.journeyInfoDetailedContainer .actionsHolder img:active {
+  transform: scale(90%);
+}
+
+.journeyInfoDetailedContainer .dayDetailsHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.journeyInfoDetailedContainer .dayDetailsHolder .dayLabel {
+  color: #eee;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.journeyInfoDetailedContainer .dayDetailsHolder .date {
+  color: #eee;
+  font-size: 15px;
+  font-weight: 200;
+}
+
+.journeyInfoDetailedContainer .figuresContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 0 0 20px 0;
+  padding: 15px 15px 0 15px;
+}
+
+@media only screen and (min-width: 980px) {
+  .journeyInfoDetailedContainer .figuresContainer {
+    padding: 30px;
+  }
+}
+
+.journeyInfoDetailedContainer .itemCard {
+  width: 180px;
+  height: 130px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  /* border: 2px solid blue; */
+}
+
+@media only screen and (max-width: 559px) {
+  .journeyInfoDetailedContainer .itemCard {
+    justify-content: center;
+  }
+}
+
+.journeyInfoDetailedContainer .itemCard .label {
+  font-weight: 200;
+  color: rgb(87, 87, 87);
+  margin-bottom: 8px;
+}
+
+.journeyInfoDetailedContainer .itemCard .mainInfo {
+  font-weight: 800;
+  font-size: 50px;
+  color: #405e02;
+}
+
+.journeyInfoDetailedContainer .itemCard .mainInfoSmallFont {
+  font-weight: 200;
+  font-size: 20px;
+  color: #405e02;
+}
+
+.journeyInfoDetailedContainer .itemCard .unit {
+  line-height: 5px;
+  font-weight: 600;
+  color: #405e02;
+}
+
+.journeyInfoDetailedContainer .driverCard {
+  width: 180px;
+  height: 130px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  /* border: 2px solid red; */
+}
+
+.journeyInfoDetailedContainer .driverCard .label {
+  font-weight: 200;
+  color: rgb(87, 87, 87);
+  margin-bottom: 8px;
+}
+
+.journeyInfoDetailedContainer .driverCard .mainInfo {
+  font-weight: 800;
+  font-size: 50px;
+  color: #405e02;
+}
+
+.journeyInfoDetailedContainer .driverCard .mainInfoSmallFont {
+  font-weight: 400;
+  font-size: 20px;
+  color: #405e02;
+}
+
+.journeyInfoDetailedContainer .driverCard .unit {
+  line-height: 5px;
+  font-weight: 600;
+  color: #405e02;
+}
+
+.journeyInfoDetailedContainerInactive {
+  top: 100vh;
+  /* bottom: -800px; */
+  animation: deactivateJourneyInfoDetails 0.3s 1 ease-in-out;
+}
+
+.journeyInfoDetailedContainerActive {
+  top: 15px;
+  /* bottom: 155px; */
+  animation: activateJourneyInfoDetails 0.3s 1 ease-in-out;
+}
+
+.journeyInfoDetailedContainer .graphContainer {
+  height: calc(100vh - 450px);
+  padding: 0 15px 15px 15px;
+}
+
+@media only screen and (max-width: 980px) {
+  .journeyInfoDetailedContainer .graphContainer {
+    height: 250px;
+  }
+}
+
+.journeyInfoDetailedContainer .journeyDetailedInfoDPHolder {
+  /* When only one DP is provided */
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid blue; */
+}
+
+.journeyInfoDetailedContainer .journeyDetailedInfoDPHolder .oneDpHolder {
+  height: 150px;
+  width: 150px;
+  border: 4px solid #415e03;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: inset 0px 0px 8px 8px rgba(68, 68, 68, 0.2);
+}
+
+.journeyInfoDetailedContainer
+  .journeyDetailedInfoDPHolder
+  .twoThreeFourDpHolder {
+  height: 75px;
+  width: 75px;
+  border: 4px solid #415e03;
+  border-radius: 50%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: inset 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+}
+
+@keyframes activateJourneyInfoDetails {
+  0% {
+    top: 100vh;
+    transform: scale(90%);
+  }
+  85% {
+    top: 15px;
+    transform: scale(90%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+
+@keyframes deactivateJourneyInfoDetails {
+  0% {
+    transform: scale(100%);
+    top: 15px;
+  }
+  15% {
+    transform: scale(90%);
+    top: 15px;
+  }
+  100% {
+    top: 100vh;
+  }
+}

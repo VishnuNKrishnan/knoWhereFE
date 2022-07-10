@@ -1,0 +1,191 @@
+.AppDashboardWrapper {
+  height: 100vh;
+  width: 100%;
+  padding: 15px;
+  /* border: 2px solid red; */
+  position: fixed;
+  top: 0;
+  left: 0px;
+  /* border: 2px solid red; */
+  /* background-color: #333333; */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.dashboardNavBarMobile {
+  height: 75px;
+  width: calc(100% - 30px);
+  /* background-color: #415f03; */
+  background-color: rgba(240, 248, 255, 0.466);
+  box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  position: fixed;
+  left: 15px;
+  bottom: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  animation: dashboardNavBarMobileLoadIn 0.5s ease-in-out;
+}
+
+@keyframes dashboardNavBarMobileLoadIn {
+  0% {
+    bottom: -100px;
+  }
+  100% {
+    bottom: 15px;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .dashboardNavBarMobile {
+    display: none;
+  }
+}
+
+.dashboardNavBarMobile img {
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+.dashboardNavBarMobile img:active {
+  transform: scale(80%);
+}
+
+.dashboardNavBarWideScreen {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  height: calc(100vh - 30px);
+  width: 375px;
+  padding: 20px;
+  /* background-color: #415f03; */
+  background-color: rgba(240, 248, 255, 0.466);
+  box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  animation: dashboardNavBarWideScreenLoadIn 0.2s ease-in-out;
+  overflow-y: scroll;
+}
+
+@keyframes dashboardNavBarWideScreenLoadIn {
+  0% {
+    left: -400px;
+  }
+  100% {
+    left: 15px;
+  }
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboardNavBarWideScreen {
+    display: none;
+  }
+}
+
+.dashboardNavBarWideScreen .sectionHeading {
+  margin: 0 0 15px 0;
+  font-size: 30px;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+}
+
+.dashboardNavBarWideScreen .sectionHeading img {
+  height: 30px;
+  margin-right: 15px;
+}
+
+.dashboardNavBarWideScreen .cardsHolder {
+  width: 100%;
+  /* height: 500px; */
+  /* border: 2px solid black; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+.dashboardNavBarWideScreen .cardsHolder .itemCard {
+  height: 160px;
+  width: 160px;
+  margin-bottom: 15px;
+  /* border: 2px solid black; */
+  padding: 15px;
+  border-radius: 5px;
+  /* background-color: #ccc; */
+  background: rgb(218, 218, 218);
+  background: linear-gradient(
+    232deg,
+    rgba(218, 218, 218, 1) 0%,
+    rgba(198, 198, 198, 1) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+@media only screen and (min-width: 980px) {
+  .dashboardNavBarWideScreen .cardsHolder .itemCard:active {
+    transform: scale(105%);
+  }
+}
+
+.dashboardNavBarWideScreen .cardsHolder .itemCard img {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.dashboardNavBarWideScreen .cardsHolder .itemCard .cardTitle {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.dashboardNavBarWideScreen .cardsHolder .itemCard .cardDescription {
+  font-size: 15px;
+  font-weight: 200;
+  color: rgb(110, 110, 110);
+}
+
+.mainContentHolder {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  height: calc(100vh - 30px);
+  width: calc(100% - 420px);
+  /* border: 2px solid rgb(218, 218, 218); */
+  /* background-color: rgba(240, 248, 255, 0.466); */
+  background-color: rgba(84, 84, 84, 0.466);
+  box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 5px;
+  overflow-y: scroll;
+  animation: mainContentHolderLoadIn 0.2s ease-in-out;
+}
+
+@keyframes mainContentHolderLoadIn {
+  0% {
+    opacity: 0%;
+    transform: scale(75%);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(100%);
+  }
+}
+
+@media only screen and (max-width: 979px) {
+  /* Mobile */
+  .mainContentHolder {
+    height: calc(100vh - 120px);
+    width: calc(100% - 30px);
+    border: none;
+  }
+}

@@ -1,0 +1,34 @@
+.dashboard_WelcomeScreenComponentWrapper {
+  height: 100%;
+  width: 100%;
+  /* border: 2px solid black; */
+  border-radius: 5px;
+  padding: 20px 15px 0 15px;
+}
+
+.dashboard_WelcomeScreenComponentWrapper .sectionHeading {
+  margin: 0 0 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_WelcomeScreenComponentWrapper .sectionHeading h2 {
+  width: 400px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  background-color: rgba(240, 255, 255, 0.481);
+  backdrop-filter: blur(8px);
+  padding: 10px 20px;
+  position: relative;
+  top: -20px;
+  border-radius: 0 0 5px 5px;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_WelcomeScreenComponentWrapper .sectionHeading h2 {
+    width: 100%;
+  }
+}

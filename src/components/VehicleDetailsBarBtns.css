@@ -1,0 +1,27 @@
+.actionBtn {
+  height: 50px;
+  width: 50px;
+  margin-left: 30px;
+  /* background-color: rgb(231, 231, 231); */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: 3px 3px 5px 2px rgb(145, 145, 145), */
+  /* -3px -3px 5px 3px rgb(210, 210, 210); */
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+.actionBtn:active {
+  transform: scale(70%);
+}
+
+/* .actionBtn:focus {
+  transform: scale(100%);
+} */
+
+.actionBtn img {
+  height: 30px;
+  width: 30px;
+}

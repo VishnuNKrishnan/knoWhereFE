@@ -1,0 +1,301 @@
+.dashboard_AssignDriverToVehicleIDWrapper {
+  height: 100%;
+  width: 100%;
+  /* border: 2px solid black; */
+  border-radius: 5px;
+  padding: 20px 15px 0 15px;
+  animation: dashboard_AssignDriverToVehicleIDWrapperLoadIn 0.2s 1 ease-in-out;
+}
+
+@keyframes dashboard_AssignDriverToVehicleIDWrapperLoadIn {
+  0% {
+    opacity: 0%;
+    transform: scale(85%);
+  }
+  100% {
+    opacity: 100%;
+    transform: scale(100%);
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .sectionHeading {
+  margin: 0 0 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .sectionHeading h2 {
+  width: 400px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 100;
+  background-color: rgba(240, 255, 255, 0.481);
+  backdrop-filter: blur(8px);
+  padding: 10px 20px;
+  position: relative;
+  top: -20px;
+  border-radius: 0 0 5px 5px;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .sectionHeading h2 {
+    width: 100%;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .sectionHeading img {
+  height: 40px;
+  margin-left: 15px;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .contentContainer {
+  width: 100%;
+  /* border: 1px solid black; */
+}
+
+/* ------------ END OF COMMON ELEMENTS TO Dashboard_*.css Files */
+
+.dashboard_AssignDriverToVehicleIDWrapper .cameraFunctionsHolder {
+  width: 100%;
+  /* border: 2px solid white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .cameraContainer {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 3px solid white;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .cameraFunctionsHolder {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .cameraBtnsHolder {
+  margin-left: 30px;
+  width: 200px;
+  height: 130px;
+  /* border: 2px solid white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .cameraBtnsHolder {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+}
+
+.cameraBtnsHolder .btn {
+  width: 200px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+.cameraBtnsHolder .primaryCTA {
+  background-color: #4c5f24;
+  border: 1px solid #39471b;
+  font-weight: 800;
+}
+
+.cameraBtnsHolder .primaryCTA p {
+  color: #c6c9bf;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.cameraBtnsHolder .secondaryCTA {
+  background-color: rgba(83, 83, 83, 0.382);
+  border: 1px solid #24242450;
+}
+
+.cameraBtnsHolder .secondaryCTA p {
+  color: #2c2c2c;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .newDriverPhotoHolder {
+  width: 300px;
+  height: 300px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* -------------- PROCESS STAGE 2 -------------- */
+
+.dashboard_AssignDriverToVehicleIDWrapper .newDriverDetailsForm {
+  width: 100%;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .newDriverDetailsForm .inputHolder {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 2px solid black; */
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper
+  .newDriverDetailsForm
+  .newDriverPhotoDisplay {
+  min-height: 190px;
+  min-width: 190px;
+  border: 3px solid white;
+  border-radius: 50%;
+  margin-right: 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper
+    .newDriverDetailsForm
+    .newDriverPhotoDisplay {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .newDriverDetailsForm .inputHolder {
+    width: 100%;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper
+  .newDriverDetailsForm
+  .driverDetailsInput {
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 400;
+  border: 2px solid rgba(0, 0, 0, 0);
+  color: #333;
+  background-color: rgba(225, 225, 225, 0.5);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_AssignDriverToVehicleIDWrapper
+    .newDriverDetailsForm
+    .inputHolder
+    input {
+    width: 100%;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .CTAsHolder {
+  width: 100%;
+  /* border: 2px solid white; */
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .CTAsHolder {
+    flex-direction: column-reverse;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .CTAsHolder .btn {
+  width: 200px;
+  height: 50px;
+  /* border: 1px solid black; */
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.05s ease-in-out;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .CTAsHolder .btn {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 0px;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .primaryCTA {
+  background-color: #4c5f24;
+  border: 1px solid #39471b;
+  font-weight: 800;
+  margin-left: 20px;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .primaryCTA p {
+  color: #c6c9bf;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .secondaryCTA {
+  background-color: rgba(83, 83, 83, 0.382);
+  border: 1px solid #24242450;
+  margin-left: 20px;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .secondaryCTA p {
+  color: #2c2c2c;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .otpInputHolder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .otpInputHolder .otpInput {
+  border: 2px solid white;
+  border-radius: 5px;
+  margin: 0;
+  text-align: center;
+  width: 500px;
+  letter-spacing: 6px;
+  color: white;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .countdownHolder {
+  margin-top: 20px;
+  /* border: 2px solid white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .countdownHolder p {
+  font-size: 25px;
+  font-weight: 700;
+}

@@ -1,0 +1,31 @@
+.blockLoaderHolder {
+  height: 23.5px;
+  width: 175px;
+  background-color: rgba(62, 62, 62, 0.4);
+  border-radius: 11.75px;
+  overflow: hidden;
+}
+
+.blockLoaderHolder .movingBlock {
+  height: 23.5px;
+  width: 60px;
+  background: rgb(218, 218, 218);
+  background: linear-gradient(
+    232deg,
+    rgba(218, 218, 218, 0.5) 0%,
+    rgba(198, 198, 198, 0.5) 100%
+  );
+  position: relative;
+  left: -60px;
+  animation: movingBlock 1s ease-in-out infinite;
+  border-radius: 11.75px;
+}
+
+@keyframes movingBlock {
+  0% {
+    left: -60px;
+  }
+  100% {
+    left: 175px;
+  }
+}

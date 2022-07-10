@@ -1,0 +1,64 @@
+.individualTrackingSection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.sectionTitle {
+  margin: 0 0 15px 0;
+}
+
+.vehicleDetailsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.vehicleDetailsRow:hover {
+  transform: scale(105%);
+}
+
+.vehicleDetailsRow:active {
+  transform: scale(95%);
+}
+
+.vehicleBrandLogo {
+  height: 70px;
+  width: 70px;
+  margin: 0px 15px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.numberPlate {
+  width: 175px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background: rgb(212, 212, 212);
+  background: linear-gradient(
+    225deg,
+    rgba(212, 212, 212, 1) 0%,
+    rgba(238, 238, 238, 1) 100%
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.numberPlate span {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.vehicleDescription {
+  width: 170px;
+}

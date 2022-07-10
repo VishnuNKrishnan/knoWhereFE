@@ -1,0 +1,151 @@
+.loginScreenWrapper {
+  height: 100vh;
+  width: 100%;
+  /* background-color: burlywood; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* border: 2px solid red; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginScreenBG {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.leftContainer {
+  height: 100vh;
+  width: 60%;
+  /* border: 2px solid blue; */
+}
+
+@media only screen and (max-width: 400px) {
+  .leftContainer {
+    display: none;
+  }
+}
+
+.rightContainer {
+  height: 100vh;
+  width: 40%;
+  padding: 10px 30px;
+  background-color: rgba(240, 248, 255, 0.466);
+  box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+  backdrop-filter: blur(5px);
+  /* border: 2px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .rightContainer {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: none;
+  }
+}
+
+.formContainer {
+  width: 500px;
+  /* border: 2px solid red; */
+}
+
+.formContainer .mainTitle,
+.formContainer input {
+  color: rgb(42, 42, 42);
+}
+
+.formContainer label {
+  color: rgb(100, 100, 100);
+}
+
+@media only screen and (max-width: 600px) {
+  .formContainer label {
+    color: rgb(65, 65, 65);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .formContainer {
+    background-color: rgba(240, 248, 255, 0.466);
+    box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 5px;
+  }
+}
+
+.formContainer .error {
+  color: rgb(151, 0, 0);
+  margin-bottom: 30px;
+}
+
+.mainTitle {
+  margin-bottom: 30px;
+  font-weight: 800;
+}
+
+label {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  font-size: 27px;
+  font-weight: 600;
+  padding: 10px 0px;
+  margin-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  border-bottom: 2px solid rgb(141, 141, 141);
+}
+
+@media only screen and (max-width: 600px) {
+  .formContainer input {
+    border-bottom: 2px solid rgb(111, 111, 111);
+  }
+}
+
+.primaryBtn {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: rgb(84, 122, 0);
+  background: linear-gradient(
+    190deg,
+    rgba(84, 122, 0, 1) 0%,
+    rgba(15, 94, 6, 1) 100%
+  );
+  font-weight: 800;
+  transition: transform 0.1s ease-in-out;
+}
+
+.primaryBtn:active {
+  transform: scale(95%);
+}
+
+.logoHolder {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 15%;
+}

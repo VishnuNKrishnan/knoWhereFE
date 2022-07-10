@@ -1,0 +1,32 @@
+.LoadingBarSlimHolder {
+  height: 5px;
+  width: 100%;
+  background-color: #425f04;
+  margin-bottom: 15px;
+  position: relative;
+  box-shadow: 0px 0px 10px 5px rgb(160, 160, 160);
+}
+
+.LoadingBarAnimated {
+  height: 5px;
+  width: 0px;
+  background-color: white;
+  position: absolute;
+  left: 0px;
+  animation: expandContract 2s infinite ease-in-out;
+}
+
+@keyframes expandContract {
+  0% {
+    width: 0px;
+    left: 0px;
+  }
+  50% {
+    width: 300px;
+    left: 0px;
+  }
+  100% {
+    width: 0px;
+    left: 300px;
+  }
+}
