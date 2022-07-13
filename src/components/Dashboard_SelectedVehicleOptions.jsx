@@ -73,9 +73,9 @@ function Dashboard_SelectedVehicleOptions() {
       },
     }
     const serverResponse = await fetch(
-      //`${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getNewVehicleId`,
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/removeDriverFromVehicle`,
       //`http://192.168.0.150:3001/app/getNewVehicleId`,
-      `http://nvmservices.ddns.net:3001/app/removeDriverFromVehicle`,
+      // `http://nvmservices.ddns.net:3001/app/removeDriverFromVehicle`,
       options,
     ).catch((err) => console.log(err))
     const serverResponseData = await serverResponse.json()
