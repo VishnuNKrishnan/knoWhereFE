@@ -62,6 +62,7 @@ function Dashboard_SelectedVehicleOptions() {
   }, [])
 
   async function removeDriverFromVehicleIDandUpdateOnUI() {
+    setIsLoading(true)
     const data = { vehicleId: currentVehicleId }
     const options = {
       method: 'POST',

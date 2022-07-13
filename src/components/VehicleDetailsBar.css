@@ -80,6 +80,9 @@
   border: 3px solid #415f03;
   border-radius: 50%;
   box-shadow: inset 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @media only screen and (max-width: 700px) {
