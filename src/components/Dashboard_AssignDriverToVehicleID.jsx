@@ -1,16 +1,62 @@
 import React from 'react'
 import './Dashboard_AssignDriverToVehicleID.css'
 import Webcam from 'react-webcam'
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
+import { UserContext } from '../userContext'
 import ProcessStageDisplay from './ProcessStageDisplay'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 function Dashboard_AssignDriverToVehicleID() {
+  //Setting the context values...
+  const {
+    loggedInAccountId,
+    setLoggedInAccountId,
+    currentVehicleId,
+    dashboardCurrentScreen,
+    setDashboardCurrentScreen,
+    dataFromDate,
+    dataToDate,
+    hasTravelledOnDate,
+    setHasTravelledOnDate,
+  } = useContext(UserContext)
+
   const webcamRef = useRef(null)
   const [driverPhotoBase64, setDriverPhotoBase64] = useState(false)
   const [driverFullName, setDriverFullName] = useState('')
   const [driverEmail, setDriverEmail] = useState('')
   const [driverContact, setDriverContact] = useState('')
+
+  const driverDataToUpload = {
+    vehicleId: currentVehicleId,
+    driverPhotoBase64: driverPhotoBase64,
+    driverFullName: driverFullName,
+    driverEmail: driverEmail,
+    driverContact: driverContact,
+    driverContactVerified: false,
+  }
+
+  //Function to call API to upload and update new driver details
+  async function assignNewDriver() {
+    const data = driverDataToUpload
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+    const serverResponse = await fetch(
+      //`${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getNewVehicleId`,
+      //`http://192.168.0.150:3001/app/getNewVehicleId`,
+      `http://nvmservices.ddns.net:3001/app/assignDriverToVehicleID`,
+      options,
+    ).catch((err) => console.log(err))
+    const serverResponseData = await serverResponse.json()
+    console.log(serverResponseData)
+    setDashboardCurrentScreen('selectedVehicleOptions')
+  }
 
   //Process Stages Array - For Process Stage Display
   const processStagesArray = [
@@ -63,7 +109,7 @@ function Dashboard_AssignDriverToVehicleID() {
                   audio={false}
                   ref={webcamRef}
                   screenshotFormat={'image/jpeg'}
-                  screenshotQuality={1}
+                  screenshotQuality={0.5}
                   height={300}
                   videoConstraints={videoConstraints}
                 />
@@ -155,7 +201,13 @@ function Dashboard_AssignDriverToVehicleID() {
           </div>
           {/* Display CTAs Holder */}
           <div className="CTAsHolder">
-            <div className="btn secondaryCTA">
+            <div
+              className="btn secondaryCTA"
+              onClick={() => {
+                // console.log(driverDataToUpload)
+                assignNewDriver()
+              }}
+            >
               <p>Save &amp; Skip Verification</p>
             </div>
 
