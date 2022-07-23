@@ -25,8 +25,8 @@ function Dashboard_AssignDriverToVehicleID() {
   const [driverFullName, setDriverFullName] = useState('')
   const [driverEmail, setDriverEmail] = useState('')
   const [driverContact, setDriverContact] = useState('')
-  const [requestId, setRequestId] = useState('') //For OTP verification
-  const [otp, setOtp] = useState('') //OTP is sent as a string
+  const [requestId, setRequestId] = useState(false) //For OTP verification
+  const [otp, setOtp] = useState(false) //OTP is sent as a string
 
   const driverDataToUpload = {
     vehicleId: currentVehicleId,
@@ -34,8 +34,8 @@ function Dashboard_AssignDriverToVehicleID() {
     driverFullName: driverFullName,
     driverEmail: driverEmail,
     driverContact: driverContact,
-    requestId: false,
-    otp: false,
+    requestId: requestId,
+    otp: otp,
   }
 
   //Function to call API to generate and send new OTP to phone number
@@ -54,8 +54,8 @@ function Dashboard_AssignDriverToVehicleID() {
       },
     }
     const serverResponse = await fetch(
-      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
-      // `http://192.168.0.150:3001/app/getOTP`,
+      // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
+      `http://192.168.0.150:3001/app/getOTP`,
       // `http://nvmservices.ddns.net:3001/app/getOTP`,
       options,
     ).catch((err) => console.log(err))
@@ -77,8 +77,8 @@ function Dashboard_AssignDriverToVehicleID() {
       },
     }
     const serverResponse = await fetch(
-      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/assignDriverToVehicleID`,
-      // `http://192.168.0.150:3001/app/assignDriverToVehicleID`,
+      // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/assignDriverToVehicleID`,
+      `http://192.168.0.150:3001/app/assignDriverToVehicleID`,
       // `http://nvmservices.ddns.net:3001/app/assignDriverToVehicleID`,
       options,
     ).catch((err) => console.log(err))
@@ -257,11 +257,28 @@ function Dashboard_AssignDriverToVehicleID() {
       {currentProcessStage == 3 ? (
         <>
           <div className="otpInputHolder">
-            <input className="otpInput" type="number" name="" id="" />
+            <input
+              value={otp}
+              className="otpInput"
+              type="number"
+              name=""
+              id=""
+              onChange={(e) => {
+                setOtp(e.target.value)
+              }}
+            />
           </div>
           <div className="countdownHolder">
             <p>02:00</p>
           </div>
+          <button
+            onClick={() => {
+              console.log(driverDataToUpload)
+              assignNewDriver()
+            }}
+          >
+            Submit
+          </button>
         </>
       ) : null}
     </div>
