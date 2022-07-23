@@ -54,8 +54,8 @@ function Dashboard_AssignDriverToVehicleID() {
       },
     }
     const serverResponse = await fetch(
-      // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
-      `http://192.168.0.150:3001/app/getOTP`,
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
+      // `http://192.168.0.150:3001/app/getOTP`,
       // `http://nvmservices.ddns.net:3001/app/getOTP`,
       options,
     ).catch((err) => console.log(err))
@@ -77,8 +77,8 @@ function Dashboard_AssignDriverToVehicleID() {
       },
     }
     const serverResponse = await fetch(
-      // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/assignDriverToVehicleID`,
-      `http://192.168.0.150:3001/app/assignDriverToVehicleID`,
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/assignDriverToVehicleID`,
+      // `http://192.168.0.150:3001/app/assignDriverToVehicleID`,
       // `http://nvmservices.ddns.net:3001/app/assignDriverToVehicleID`,
       options,
     ).catch((err) => console.log(err))
