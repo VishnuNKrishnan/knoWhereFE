@@ -61,9 +61,7 @@ function Dashboard_AssignDriverToVehicleID() {
     ).catch((err) => console.log(err))
     const serverResponseData = await serverResponse.json()
     //console.log(serverResponseData)
-    serverResponseData.success === true
-      ? setRequestId(serverResponseData.requestId)
-      : null
+    setRequestId(serverResponseData.requestId)
   }
 
   //Function to call API to upload and update new driver details
