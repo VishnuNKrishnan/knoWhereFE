@@ -25,6 +25,8 @@ function Dashboard_AssignDriverToVehicleID() {
   const [driverFullName, setDriverFullName] = useState('')
   const [driverEmail, setDriverEmail] = useState('')
   const [driverContact, setDriverContact] = useState('')
+  const [requestId, setRequestId] = useState('') //For OTP verification
+  const [otp, setOtp] = useState('') //OTP is sent as a string
 
   const driverDataToUpload = {
     vehicleId: currentVehicleId,
@@ -32,7 +34,33 @@ function Dashboard_AssignDriverToVehicleID() {
     driverFullName: driverFullName,
     driverEmail: driverEmail,
     driverContact: driverContact,
-    driverContactVerified: false,
+    requestId: false,
+    otp: false,
+  }
+
+  //Function to call API to generate and send new OTP to phone number
+  async function getOTP() {
+    const data = {
+      phoneNumber: driverContact,
+      transactionName: 'new driver assignment', //This is displayed as is in the OTP SMS sent to the phone
+    }
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+    const serverResponse = await fetch(
+      // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
+      `http://192.168.0.150:3001/app/getOTP`,
+      // `http://nvmservices.ddns.net:3001/app/getOTP`,
+      options,
+    ).catch((err) => console.log(err))
+    const serverResponseData = await serverResponse.json()
+    console.log(serverResponseData)
   }
 
   //Function to call API to upload and update new driver details
@@ -48,8 +76,8 @@ function Dashboard_AssignDriverToVehicleID() {
       },
     }
     const serverResponse = await fetch(
-      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/assignDriverToVehicleID`,
-      //`http://192.168.0.150:3001/app/getNewVehicleId`,
+      // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/assignDriverToVehicleID`,
+      `http://192.168.0.150:3001/app/assignDriverToVehicleID`,
       // `http://nvmservices.ddns.net:3001/app/assignDriverToVehicleID`,
       options,
     ).catch((err) => console.log(err))
@@ -211,7 +239,13 @@ function Dashboard_AssignDriverToVehicleID() {
               <p>Save &amp; Skip Verification</p>
             </div>
 
-            <div className="btn primaryCTA">
+            <div
+              className="btn primaryCTA"
+              onClick={() => {
+                getOTP()
+                setCurrentProcessStage(3)
+              }}
+            >
               <p>Send OTP</p>
             </div>
           </div>
