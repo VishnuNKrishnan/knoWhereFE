@@ -27,6 +27,7 @@ function Dashboard_AssignDriverToVehicleID() {
   const [driverContact, setDriverContact] = useState('')
   const [requestId, setRequestId] = useState(false) //For OTP verification
   const [otp, setOtp] = useState(false) //OTP is sent as a string
+  const [otpValidationMessage, setOtpValidationMessage] = useState('')
 
   const driverDataToUpload = {
     vehicleId: currentVehicleId,
@@ -67,6 +68,7 @@ function Dashboard_AssignDriverToVehicleID() {
   //Function to call API to upload and update new driver details
   async function assignNewDriver() {
     const data = driverDataToUpload
+    console.log(driverDataToUpload)
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -84,7 +86,11 @@ function Dashboard_AssignDriverToVehicleID() {
     ).catch((err) => console.log(err))
     const serverResponseData = await serverResponse.json()
     console.log(serverResponseData)
-    setDashboardCurrentScreen('selectedVehicleOptions')
+    if (serverResponseData.otpValidationSuccess === true) {
+      setDashboardCurrentScreen('selectedVehicleOptions')
+    } else {
+      setOtpValidationMessage(serverResponseData.message)
+    }
   }
 
   //Process Stages Array - For Process Stage Display
@@ -256,20 +262,24 @@ function Dashboard_AssignDriverToVehicleID() {
       {/* Element to display for stage 3 */}
       {currentProcessStage == 3 ? (
         <>
-          <div className="otpInputHolder">
-            <input
-              value={otp}
-              className="otpInput"
-              type="number"
-              name=""
-              id=""
-              onChange={(e) => {
-                setOtp(e.target.value)
-              }}
-            />
-          </div>
-          <div className="btn primaryCTA" onClick={assignNewDriver}>
-            <p>SUBMIT</p>
+          <div className="otpFormHolder">
+            <div className="otpInputHolder">
+              <input
+                value={otp}
+                className="otpInput"
+                type="number"
+                name=""
+                id=""
+                onChange={(e) => {
+                  setOtp(e.target.value)
+                }}
+              />
+              <p className="otpValidationMessage">{otpValidationMessage}</p>
+            </div>
+
+            <div className="btn primaryCTA" onClick={assignNewDriver}>
+              <p>SUBMIT</p>
+            </div>
           </div>
         </>
       ) : null}

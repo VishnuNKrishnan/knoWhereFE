@@ -271,10 +271,43 @@
   color: #2c2c2c;
 }
 
+.dashboard_AssignDriverToVehicleIDWrapper .otpFormHolder {
+  width: 100%;
+  /* border: 2px solid white; */
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .otpFormHolder {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .otpFormHolder .btn {
+  min-width: 200px;
+  height: 56px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 629px) {
+  .dashboard_AssignDriverToVehicleIDWrapper .otpFormHolder .btn {
+    margin: 15px 0 0 0;
+    max-width: 400px;
+  }
+}
+
 .dashboard_AssignDriverToVehicleIDWrapper .otpInputHolder {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .dashboard_AssignDriverToVehicleIDWrapper .otpInputHolder .otpInput {
@@ -282,7 +315,7 @@
   border-radius: 5px;
   margin: 0;
   text-align: center;
-  width: 500px;
+  max-width: 400px;
   letter-spacing: 6px;
   color: white;
 }
@@ -298,4 +331,30 @@
 .dashboard_AssignDriverToVehicleIDWrapper .countdownHolder p {
   font-size: 25px;
   font-weight: 700;
+}
+
+.dashboard_AssignDriverToVehicleIDWrapper .otpValidationMessage {
+  color: rgb(230, 182, 182);
+  font-weight: 500;
+  margin-top: 15px;
+  background-color: rgba(118, 6, 6, 0.299);
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 400px;
+  animation: loadIn 0.25s 1 ease-in-out;
+}
+
+@keyframes loadIn {
+  0% {
+    transform: scale(85%);
+    opacity: 0%;
+  }
+  85% {
+    transform: scale(105%);
+    opacity: 100%;
+  }
+  100% {
+    transform: scale(100%);
+    opacity: 100%;
+  }
 }
