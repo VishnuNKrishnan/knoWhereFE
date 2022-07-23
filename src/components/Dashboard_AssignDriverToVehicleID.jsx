@@ -268,17 +268,9 @@ function Dashboard_AssignDriverToVehicleID() {
               }}
             />
           </div>
-          <div className="countdownHolder">
-            <p>02:00</p>
+          <div className="btn primaryCTA" onClick={assignNewDriver}>
+            <p>SUBMIT</p>
           </div>
-          <button
-            onClick={() => {
-              console.log(driverDataToUpload)
-              assignNewDriver()
-            }}
-          >
-            Submit
-          </button>
         </>
       ) : null}
     </div>

@@ -9,6 +9,7 @@ import LogoutLogo from '../uiAssets/logout.svg'
 import TrackOneLogo from '../uiAssets/aim.svg'
 import UpgradeLogo from '../uiAssets/upgrade.svg'
 import BG from '../uiAssets/loginScreenBG.png'
+import KnoWhereLogo from '../uiAssets/knowhereLogoGrey.png'
 //import BG from '../uiAssets/appBG.jpeg'
 import Dashboard_TrackOneContentComponent from './Dashboard_TrackOneContentComponent'
 import Dashboard_WelcomeScreenComponent from './Dashboard_WelcomeScreenComponent'
@@ -102,6 +103,10 @@ function AppDashboard() {
             <p className="cardTitle">Log Out</p>
             <p className="cardDescription">Payment history and invoices</p>
           </div>
+        </div>
+        <div className="brandingHolder">
+          <img src={KnoWhereLogo} alt="Brand Logo" className="brandLogo" />
+          <p className="versionNumber">v1.2</p>
         </div>
       </div>
       <div className="mainContentHolder">

@@ -154,6 +154,27 @@
   color: rgb(110, 110, 110);
 }
 
+.dashboardNavBarWideScreen .brandingHolder {
+  width: 100%;
+  height: calc(100% - 576px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dashboardNavBarWideScreen .brandingHolder .brandLogo {
+  height: 20px;
+  opacity: 0.5;
+}
+
+.dashboardNavBarWideScreen .brandingHolder .versionNumber {
+  color: rgb(124, 124, 124);
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 5px;
+}
+
 .mainContentHolder {
   position: fixed;
   top: 15px;
