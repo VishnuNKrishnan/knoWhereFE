@@ -166,7 +166,7 @@ function Dashboard_AssignDriverToVehicleID() {
                 </div>
 
                 <div className="btn secondaryCTA">
-                  <p>Switch Camera</p>
+                  <p>Use Smart Phone</p>
                 </div>
               </>
             ) : (

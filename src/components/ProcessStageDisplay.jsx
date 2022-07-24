@@ -32,7 +32,9 @@ function ProcessStageDisplay(props) {
               <div
                 className={`processStageNumberHolder ${cardClass}`}
                 onClick={() => {
-                  props.setCurrentProcessStage(obj.stage)
+                  if (props.currentProcessStage > obj.stage) {
+                    props.setCurrentProcessStage(obj.stage)
+                  }
                 }}
               >
                 <p>{cardLabel}</p>

@@ -149,20 +149,28 @@ function Dashboard_SelectedVehicleOptions() {
             >
               <p>TRACK</p>
             </div>
-            <div
-              className="btn secondaryCTA"
-              onClick={() => {
-                manageDriverBtnLabel === 'Assign Driver'
-                  ? setDashboardCurrentScreen('assignDriver')
-                  : removeDriverFromVehicleIDandUpdateOnUI()
-              }}
-            >
-              <p>{manageDriverBtnLabel}</p>
-            </div>
+            {isLoading ? (
+              <BlockLoader />
+            ) : (
+              <div
+                className="btn secondaryCTA"
+                onClick={() => {
+                  manageDriverBtnLabel === 'Assign Driver'
+                    ? setDashboardCurrentScreen('assignDriver')
+                    : removeDriverFromVehicleIDandUpdateOnUI()
+                }}
+              >
+                <p>{manageDriverBtnLabel}</p>
+              </div>
+            )}
 
-            <div className="btn secondaryCTA">
-              <p>Edit Vehicle Details</p>
-            </div>
+            {isLoading ? (
+              <BlockLoader />
+            ) : (
+              <div className="btn secondaryCTA">
+                <p>Edit Vehicle Details</p>
+              </div>
+            )}
           </div>
         </div>
         <div className="row2Container">
