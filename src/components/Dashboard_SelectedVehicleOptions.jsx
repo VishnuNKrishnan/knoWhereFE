@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import './Dashboard_SelectedVehicleOptions.css'
 import { UserContext } from '../userContext'
 import CircularLoader from './loaders/CircularLoader'
 import BlockLoader from './loaders/BlockLoader'
 import ToggleSwitch from './switches/ToggleSwitch'
+import VerifiedSymbol from '../uiAssets/verified.png'
 
 function Dashboard_SelectedVehicleOptions() {
   const {

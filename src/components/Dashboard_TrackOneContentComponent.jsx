@@ -5,6 +5,7 @@ import './Dashboard_TrackOneContentComponent.css'
 import TrackOneLogo from '../uiAssets/aim.svg'
 import AddLogo from '../uiAssets/plus.svg'
 import CircularLoader from './loaders/CircularLoader'
+import textReduce from '../customModules/textReduce'
 
 function Dashboard_TrackOneContentComponent() {
   //Setting the context values...
@@ -128,8 +129,12 @@ function Dashboard_TrackOneContentComponent() {
                 }}
               ></div>
               <p className="cardTitle">{obj.licensePlate}</p>
-              <p className="cardDescription">{obj.vehicleDescription}</p>
-              <p className="cardDescription">{obj.driverName}</p>
+              <p className="cardDescription">
+                {textReduce(obj.vehicleDescription, 15)}
+              </p>
+              <p className="cardDescription">
+                {textReduce(obj.driverName, 15)}
+              </p>
             </div>
           )
         })}
