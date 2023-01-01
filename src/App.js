@@ -106,7 +106,7 @@ function App() {
             setDetailedInfoToggleStatus,
           }}
         >
-          {isLoggedIn ? <HomeScreen /> : <HomeScreen />}
+          {isLoggedIn ? <HomeScreen /> : <LoginScreen />}
         </UserContext.Provider>
       </div>
     </Router>

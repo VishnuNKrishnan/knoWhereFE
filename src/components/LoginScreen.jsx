@@ -51,9 +51,11 @@ function LoginScreen(props) {
         setIsLoggedIn(true)
         navigator.vibrate(50)
         setSubmitBtnText('LOGIN')
+        console.log(serverResponseData.message)
       } else {
         setSubmitBtnText('LOGIN')
         navigator.vibrate(500)
+        console.log(serverResponseData.message)
       }
     }
     callAuthenticationAPI()

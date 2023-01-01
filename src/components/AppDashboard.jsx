@@ -21,6 +21,8 @@ import Dashboard_AssignDriverToVehicleID from './Dashboard_AssignDriverToVehicle
 function AppDashboard() {
   //Setting the context values...
   const {
+    isLoggedIn,
+    setIsLoggedIn,
     loggedInAccountId,
     setLoggedInAccountId,
     currentVehicleId,
@@ -50,7 +52,9 @@ function AppDashboard() {
         <img src={GlobeLogo} alt="" />
         <img src={SettingsLogo} alt="" />
         <img src={PaymentsLogo} alt="" />
-        <img src={LogoutLogo} alt="" />
+        <img src={LogoutLogo} alt="" onClick={() => {
+          setIsLoggedIn(false)
+        }} />
       </div>
       <div className="dashboardNavBarWideScreen">
         <h2 className="sectionHeading">
@@ -98,10 +102,12 @@ function AppDashboard() {
             <p className="cardTitle">Upgrade</p>
             <p className="cardDescription">Make the most out of KnoWhere!</p>
           </div>
-          <div className="itemCard">
+          <div className="itemCard" onClick={() => {
+            setIsLoggedIn(false)
+          }}>
             <img src={LogoutLogo} alt="" />
             <p className="cardTitle">Log Out</p>
-            <p className="cardDescription">Payment history and invoices</p>
+            <p className="cardDescription">Stop tracking and log out</p>
           </div>
         </div>
         <div className="brandingHolder">

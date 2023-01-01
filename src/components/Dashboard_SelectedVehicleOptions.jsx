@@ -48,7 +48,7 @@ function Dashboard_SelectedVehicleOptions() {
       options,
     ).catch((err) => console.log(err))
     const serverResponseData = await serverResponse.json()
-    //console.log(serverResponseData)
+    console.log(serverResponseData)
 
     setVehicleDetailsObject(serverResponseData)
     serverResponseData.driverName === 'Driver Unassigned'
@@ -100,11 +100,10 @@ function Dashboard_SelectedVehicleOptions() {
           <div
             className="dpContainer"
             style={{
-              backgroundImage: `url(${
-                vehicleDetailsObject.displayPictureBase64
-                  ? vehicleDetailsObject.displayPictureBase64
-                  : templateDP
-              })`,
+              backgroundImage: `url(${vehicleDetailsObject.displayPictureBase64
+                ? vehicleDetailsObject.displayPictureBase64
+                : templateDP
+                })`,
             }}
           >
             {isLoading ? <CircularLoader /> : null}
@@ -128,6 +127,7 @@ function Dashboard_SelectedVehicleOptions() {
                 ) : (
                   <BlockLoader />
                 )}
+                {vehicleDetailsObject.driverContactVerified === true ? <img className="verifiedSymbol" src={VerifiedSymbol} alt="" /> : null}
               </h3>
             </div>
             <div>
@@ -194,6 +194,7 @@ function Dashboard_SelectedVehicleOptions() {
                 ) : (
                   <BlockLoader />
                 )}
+                {vehicleDetailsObject.driverContactVerified === true ? <img className="verifiedSymbol" src={VerifiedSymbol} alt="" /> : null}
               </h3>
             </div>
             <div>
@@ -309,6 +310,11 @@ function Dashboard_SelectedVehicleOptions() {
 
           <div className="vehicleDetailsItemCard">
             <p>Email Alert</p>
+            <ToggleSwitch isToggled={false} />
+          </div>
+
+          <div className="vehicleDetailsItemCard">
+            <p>Receive Email Report</p>
             <ToggleSwitch isToggled={false} />
           </div>
         </div>

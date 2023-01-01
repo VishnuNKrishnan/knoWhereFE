@@ -294,3 +294,8 @@
   height: 1px;
   background-color: #3f3f3f;
 }
+
+.verifiedSymbol{
+  height: 15px;
+  margin-left: 4px;
+}

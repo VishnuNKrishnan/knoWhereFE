@@ -30,6 +30,14 @@
   animation: dashboardNavBarMobileLoadIn 0.5s ease-in-out;
 }
 
+.creditCardHolder{
+  padding: 20px;
+}
+
+.creditCardHolder .creditCardDetailsForm .creditCardNumber{
+  font-size: 15px;
+}
+
 @keyframes dashboardNavBarMobileLoadIn {
   0% {
     bottom: -100px;
