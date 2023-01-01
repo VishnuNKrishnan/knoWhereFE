@@ -51,8 +51,11 @@ function AppDashboard() {
         />
         <img src={GlobeLogo} alt="" />
         <img src={SettingsLogo} alt="" />
-        <img src={PaymentsLogo} alt="" />
+        <img src={PaymentsLogo} alt="" onClick={() => {
+          setDashboardCurrentScreen('payments')
+        }} />
         <img src={LogoutLogo} alt="" onClick={() => {
+          setDashboardCurrentScreen('welcome')
           setIsLoggedIn(false)
         }} />
       </div>
@@ -103,6 +106,7 @@ function AppDashboard() {
             <p className="cardDescription">Make the most out of KnoWhere!</p>
           </div>
           <div className="itemCard" onClick={() => {
+            setDashboardCurrentScreen('welcome')
             setIsLoggedIn(false)
           }}>
             <img src={LogoutLogo} alt="" />

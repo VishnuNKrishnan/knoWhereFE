@@ -8,11 +8,15 @@ function Dashboard_PaymentsComponent() {
         <h2>Payments</h2>
       </div>
 
-      <div className="creditCardHolder">
+      {/* <div className="creditCardHolder">
         <form className="creditCardDetailsForm">
           <input className="creditCardNumber" type="text" />
         </form>
-      </div>
+      </div> */}
+
+      <div className=''></div>
+      <p>Current Plan</p>
+      <h1>Basic for Individual</h1>
     </div>
   )
 }

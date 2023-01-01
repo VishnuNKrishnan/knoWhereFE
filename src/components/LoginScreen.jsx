@@ -5,7 +5,7 @@ import Logo from '../uiAssets/knowhereLogoGrey.png'
 import { UserContext } from '../userContext'
 
 function LoginScreen(props) {
-  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext)
+  const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
 
   const [statusMessage, setStatusMessage] = useState('') //Message to display upn failed authentication
   const [loadingClass, setLoadingClass] = useState('') //Class to be applied to primaryBtn while loading process is going on
@@ -50,6 +50,7 @@ function LoginScreen(props) {
       if (serverResponseData.status == 'success') {
         setIsLoggedIn(true)
         navigator.vibrate(50)
+        setLoggedInAccountId(idValue)
         setSubmitBtnText('LOGIN')
         console.log(serverResponseData.message)
       } else {

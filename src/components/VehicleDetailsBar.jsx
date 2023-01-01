@@ -111,7 +111,9 @@ function VehicleDetailsBar(props) {
       </div>
 
       <div className="actionsHolder">
-        <CallDriverBtn />
+        <CallDriverBtn
+          driverContactNumber={driverContact}
+        />
         <VehicleDetailsBarInfoBtn />
         <VehicleDetailsBarShareBtn />
         <VehicleDetailsBarCloseBtn />

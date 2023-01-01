@@ -10,8 +10,9 @@ import timestampToDateString from './customModules/timestampToDateString'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [loggedInAccountId, setLoggedInAccountId] = useState('1212621')
-  const [currentVehicleId, setCurrentVehicleId] = useState('484-lng-52q-452')
+  const [loggedInAccountId, setLoggedInAccountId] = useState('')
+  //const [currentVehicleId, setCurrentVehicleId] = useState('484-lng-52q-452')
+  const [currentVehicleId, setCurrentVehicleId] = useState('')
   const [detailedInfoToggleStatus, setDetailedInfoToggleStatus] = useState(
     false,
   )
