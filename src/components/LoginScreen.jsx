@@ -76,10 +76,10 @@ function LoginScreen(props) {
         >
           <h1 className="mainTitle">Login</h1>
           <p className="error">{statusMessage}&nbsp;</p>
-          <label htmlFor="emailAccountIdInput">Email ID or Account ID</label>
+          <label htmlFor="emailAccountIdInput">Account ID</label>
           <input
             value={idValue}
-            type="text"
+            type="number"
             name=""
             id="emailAccountIdInput"
             onChange={(e) => {
