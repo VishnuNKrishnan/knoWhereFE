@@ -8,16 +8,24 @@ import { useEffect } from 'react'
 function LoginScreen(props) {
   const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
 
+  //Form display state variables
+  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm
+  const [loginFormStyle, setLoginFormStyle] = useState('block')
+  const [createAccountFormStyle, setCreateAccountFormStyle] = useState('none')
+
+  //Login form state variables
   const [statusMessage, setStatusMessage] = useState('') //Message to display upn failed authentication
   const [loadingClass, setLoadingClass] = useState('') //Class to be applied to primaryBtn while loading process is going on
   const [idValue, setIdValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
   const [submitBtnText, setSubmitBtnText] = useState('LOGIN')
 
-  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm
-
-  const [loginFormStyle, setLoginFormStyle] = useState('block')
-  const [createAccountFormStyle, setCreateAccountFormStyle] = useState('none')
+  //Create Account state variables
+  const [createAccountStatusMessage, setCreateAccountStatusMessage] = useState('') //Message to display upn failed account creation
+  const [createIdValue, setCreateIdValue] = useState('')
+  const [createPasswordValue, setCreatePasswordValue] = useState('')
+  const [createPhoneNumberValue, setCreatePhoneNumberValue] = useState('')
+  const [createOTPValue, setCreateOTPValue] = useState('')
 
   useEffect(() => {
     if (activeForm === 'loginForm') {
@@ -141,39 +149,39 @@ function LoginScreen(props) {
           <p className="error">{statusMessage}&nbsp;</p>
           <label htmlFor="emailAccountIdInput">Email ID</label>
           <input
-            value={idValue}
-            type="number"
+            value={createIdValue}
+            type="text"
             name=""
             id="emailAccountIdInput"
             onChange={(e) => {
-              setStatusMessage('')
-              setIdValue(e.target.value)
+              setCreateAccountStatusMessage('')
+              setCreateIdValue(e.target.value)
             }}
           />
           <label htmlFor="emailAccountPasswordInput">Mobile Number</label>
           <input
-            value={passwordValue}
-            type="password"
+            value={createPhoneNumberValue}
+            type="number"
             name=""
             id="emailAccountPasswordInput"
             onChange={(e) => {
-              setStatusMessage('')
-              setPasswordValue(e.target.value)
+              setCreateAccountStatusMessage('')
+              setCreatePhoneNumberValue(e.target.value)
             }}
           />
           <label htmlFor="emailAccountPasswordInput">OTP</label>
           <input
-            value={passwordValue}
+            value={createOTPValue}
             type="password"
             name=""
             id="emailAccountPasswordInput"
             onChange={(e) => {
-              setStatusMessage('')
-              setPasswordValue(e.target.value)
+              setCreateAccountStatusMessage('')
+              setCreateOTPValue(e.target.value)
             }}
           />
           <button className={`primaryBtn ${loadingClass}`} type="submit">
-            Submit
+            Send OTP
           </button>
 
           <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
