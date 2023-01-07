@@ -89,6 +89,21 @@
   margin-bottom: 30px;
 }
 
+.rightContainer form{
+  animation: loadForm 0.2s 1;
+}
+
+@keyframes loadForm {
+  0%{
+    opacity: 0%;
+    transform: scale(75%);
+  }
+  100%{
+    opacity: 100%;
+    transform: scale(100%);
+  }
+}
+
 .mainTitle {
   margin-bottom: 30px;
   font-weight: 800;
@@ -135,6 +150,29 @@ input {
 }
 
 .primaryBtn:active {
+  transform: scale(95%);
+}
+
+.secondaryBtn {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid rgb(84, 122, 0);
+  background-color: rgba(0, 0, 0, 0);
+  /* background: rgb(84, 122, 0);
+  background: linear-gradient(
+    190deg,
+    rgb(132, 140, 115) 0%,
+    rgb(61, 79, 59) 100%
+  ); */
+  color: rgb(84, 122, 0);
+  font-weight: 300;
+  transition: transform 0.1s ease-in-out;
+}
+
+.secondaryBtn:active {
   transform: scale(95%);
 }
 

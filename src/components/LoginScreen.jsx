@@ -3,6 +3,7 @@ import './LoginScreen.css'
 import BG from '../uiAssets/loginScreenBG.png'
 import Logo from '../uiAssets/knowhereLogoGrey.png'
 import { UserContext } from '../userContext'
+import { useEffect } from 'react'
 
 function LoginScreen(props) {
   const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
@@ -12,6 +13,21 @@ function LoginScreen(props) {
   const [idValue, setIdValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
   const [submitBtnText, setSubmitBtnText] = useState('LOGIN')
+
+  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm
+
+  const [loginFormStyle, setLoginFormStyle] = useState('block')
+  const [createAccountFormStyle, setCreateAccountFormStyle] = useState('none')
+
+  useEffect(() => {
+    if (activeForm === 'loginForm') {
+      setLoginFormStyle('block')
+      setCreateAccountFormStyle('none')
+    } else if (activeForm === 'createAccountForm') {
+      setLoginFormStyle('none')
+      setCreateAccountFormStyle('block')
+    }
+  }, [activeForm])
 
   const authenticationFormHandler = async (e) => {
     e.preventDefault()
@@ -70,10 +86,12 @@ function LoginScreen(props) {
       <div className="leftContainer"></div>
 
       <div className="rightContainer">
+        {/* LOGIN FORM */}
         <form
           className="formContainer"
           onSubmit={authenticationFormHandler}
           autoComplete="off"
+          style={{ display: loginFormStyle }}
         >
           <h1 className="mainTitle">Login</h1>
           <p className="error">{statusMessage}&nbsp;</p>
@@ -102,6 +120,66 @@ function LoginScreen(props) {
           <button className={`primaryBtn ${loadingClass}`} type="submit">
             {submitBtnText}
           </button>
+
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('createAccountForm') }}>
+            Create an account
+          </button>
+
+          <div className="logoHolder">
+            <img className="logo" src={Logo} alt="knoWhere" />
+          </div>
+        </form>
+
+        {/* CREATE ACCOUNT FORM */}
+        <form
+          className="formContainer"
+          onSubmit={authenticationFormHandler}
+          autoComplete="off"
+          style={{ display: createAccountFormStyle }}
+        >
+          <h1 className="mainTitle">Create an Account</h1>
+          <p className="error">{statusMessage}&nbsp;</p>
+          <label htmlFor="emailAccountIdInput">Email ID</label>
+          <input
+            value={idValue}
+            type="number"
+            name=""
+            id="emailAccountIdInput"
+            onChange={(e) => {
+              setStatusMessage('')
+              setIdValue(e.target.value)
+            }}
+          />
+          <label htmlFor="emailAccountPasswordInput">Mobile Number</label>
+          <input
+            value={passwordValue}
+            type="password"
+            name=""
+            id="emailAccountPasswordInput"
+            onChange={(e) => {
+              setStatusMessage('')
+              setPasswordValue(e.target.value)
+            }}
+          />
+          <label htmlFor="emailAccountPasswordInput">OTP</label>
+          <input
+            value={passwordValue}
+            type="password"
+            name=""
+            id="emailAccountPasswordInput"
+            onChange={(e) => {
+              setStatusMessage('')
+              setPasswordValue(e.target.value)
+            }}
+          />
+          <button className={`primaryBtn ${loadingClass}`} type="submit">
+            Submit
+          </button>
+
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
+            Have an account? Login here.
+          </button>
+
           <div className="logoHolder">
             <img className="logo" src={Logo} alt="knoWhere" />
           </div>
