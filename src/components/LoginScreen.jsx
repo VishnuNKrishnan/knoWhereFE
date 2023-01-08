@@ -9,9 +9,10 @@ function LoginScreen(props) {
   const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
 
   //Form display state variables
-  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm
+  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm 3) createAccountOTPFrom
   const [loginFormStyle, setLoginFormStyle] = useState('block')
   const [createAccountFormStyle, setCreateAccountFormStyle] = useState('none')
+  const [createAccountOTPFormStyle, setCreateAccountOTPFormStyle] = useState('none')
 
   //Login form state variables
   const [statusMessage, setStatusMessage] = useState('') //Message to display upn failed authentication
@@ -21,19 +22,30 @@ function LoginScreen(props) {
   const [submitBtnText, setSubmitBtnText] = useState('LOGIN')
 
   //Create Account state variables
-  const [createAccountStatusMessage, setCreateAccountStatusMessage] = useState('') //Message to display upn failed account creation
+  const [createAccountStatusMessage, setCreateAccountStatusMessage] = useState('') //Message to display upon failed account creation
   const [createIdValue, setCreateIdValue] = useState('')
   const [createPasswordValue, setCreatePasswordValue] = useState('')
   const [createPhoneNumberValue, setCreatePhoneNumberValue] = useState('')
   const [createOTPValue, setCreateOTPValue] = useState('')
 
+  //OTP State Variables
+  const [createAccountOTPStatusMessage, setCreateAccountOTPStatusMessage] = useState('')
+  const [createAccountOTPValue, setCreateAccountOTPValue] = useState('')
+  const [createAccountOTPSubmitBtnText, setCreateAccountOTPSubmitBtnText] = useState('SUBMIT')
+
   useEffect(() => {
     if (activeForm === 'loginForm') {
       setLoginFormStyle('block')
       setCreateAccountFormStyle('none')
+      setCreateAccountOTPFormStyle('none')
     } else if (activeForm === 'createAccountForm') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('block')
+      setCreateAccountOTPFormStyle('none')
+    } else if (activeForm === 'createAccountOTPForm') {
+      setLoginFormStyle('none')
+      setCreateAccountFormStyle('none')
+      setCreateAccountOTPFormStyle('block')
     }
   }, [activeForm])
 
@@ -169,6 +181,29 @@ function LoginScreen(props) {
               setCreatePhoneNumberValue(e.target.value)
             }}
           />
+
+          <button className={`primaryBtn ${loadingClass}`} type="submit" onClick={() => { setActiveForm('createAccountOTPForm') }}>
+            Send OTP
+          </button>
+
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
+            Have an account? Login here.
+          </button>
+
+          <div className="logoHolder">
+            <img className="logo" src={Logo} alt="knoWhere" />
+          </div>
+        </form>
+
+        {/* OTP FORM */}
+        <form
+          className="formContainer"
+          onSubmit={authenticationFormHandler}
+          autoComplete="off"
+          style={{ display: createAccountOTPFormStyle }}
+        >
+          <h1 className="mainTitle">One Time Password</h1>
+          <p className="error">{statusMessage}&nbsp;</p>
           <label htmlFor="emailAccountPasswordInput">OTP</label>
           <input
             value={createOTPValue}
@@ -179,9 +214,10 @@ function LoginScreen(props) {
               setCreateAccountStatusMessage('')
               setCreateOTPValue(e.target.value)
             }}
+            style={{ textAlign: 'center', letterSpacing: '3px' }}
           />
           <button className={`primaryBtn ${loadingClass}`} type="submit">
-            Send OTP
+            {createAccountOTPSubmitBtnText}
           </button>
 
           <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
