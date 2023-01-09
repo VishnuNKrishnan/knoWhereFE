@@ -29,9 +29,47 @@ function LoginScreen(props) {
   const [createOTPValue, setCreateOTPValue] = useState('')
 
   //OTP State Variables
+  const [requestId, setRequestId] = useState(false) //For OTP verification
+  const [otp, setOtp] = useState(false) //OTP is sent as a string
+  const [otpValidationMessage, setOtpValidationMessage] = useState('')
   const [createAccountOTPStatusMessage, setCreateAccountOTPStatusMessage] = useState('')
   const [createAccountOTPValue, setCreateAccountOTPValue] = useState('')
   const [createAccountOTPSubmitBtnText, setCreateAccountOTPSubmitBtnText] = useState('SUBMIT')
+
+  //New Account Data to upload
+  const newAccountDataToUpload = {
+    emailId: createIdValue,
+    mobileNumber: createPhoneNumberValue,
+    accountPassword: createPasswordValue,
+    requestId: requestId,
+    otp: otp,
+  }
+
+  //Function to call API to generate and send new OTP to phone number
+  async function getOTP() {
+    const data = {
+      phoneNumber: `+${createPhoneNumberValue}`,
+      transactionName: 'new account creation', //This is displayed as is in the OTP SMS sent to the phone
+    }
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+    const serverResponse = await fetch(
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
+      // `http://192.168.0.150:3001/app/getOTP`,
+      // `http://nvmservices.ddns.net:3001/app/getOTP`,
+      options,
+    ).catch((err) => console.log(err))
+    const serverResponseData = await serverResponse.json()
+    //console.log(serverResponseData)
+    setRequestId(serverResponseData.requestId)
+  }
 
   useEffect(() => {
     if (activeForm === 'loginForm') {
@@ -49,7 +87,7 @@ function LoginScreen(props) {
     }
   }, [activeForm])
 
-  const authenticationFormHandler = async (e) => {
+  const authenticationFormHandler = async (e) => { //Login Form
     e.preventDefault()
     //ADD CODE TO VALIDATE INPUTS
 
@@ -96,6 +134,12 @@ function LoginScreen(props) {
       }
     }
     callAuthenticationAPI()
+  }
+
+  const getAccountCreationOTP = (e) => { //OTP for account creation
+    //Activate OTP Form
+    getOTP()
+    setActiveForm('createAccountOTPForm')
   }
 
   return (
@@ -153,7 +197,7 @@ function LoginScreen(props) {
         {/* CREATE ACCOUNT FORM */}
         <form
           className="formContainer"
-          onSubmit={authenticationFormHandler}
+          onSubmit={getAccountCreationOTP}
           autoComplete="off"
           style={{ display: createAccountFormStyle }}
         >
@@ -182,7 +226,7 @@ function LoginScreen(props) {
             }}
           />
 
-          <button className={`primaryBtn ${loadingClass}`} type="submit" onClick={() => { setActiveForm('createAccountOTPForm') }}>
+          <button className={`primaryBtn ${loadingClass}`} type="button" onClick={getAccountCreationOTP}>
             Send OTP
           </button>
 
@@ -207,7 +251,7 @@ function LoginScreen(props) {
           <label htmlFor="emailAccountPasswordInput">OTP</label>
           <input
             value={createOTPValue}
-            type="password"
+            type="number"
             name=""
             id="emailAccountPasswordInput"
             onChange={(e) => {
