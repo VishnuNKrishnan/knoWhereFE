@@ -36,21 +36,13 @@ function LoginScreen(props) {
   const [createAccountOTPValue, setCreateAccountOTPValue] = useState('')
   const [createAccountOTPSubmitBtnText, setCreateAccountOTPSubmitBtnText] = useState('SUBMIT')
 
-  //New Account Data to upload
-  const newAccountDataToUpload = {
-    emailId: createIdValue,
-    mobileNumber: createPhoneNumberValue,
-    accountPassword: createPasswordValue,
-    requestId: requestId,
-    otp: otp,
-  }
-
   //Function to call API to generate and send new OTP to phone number
   async function getOTP() {
     const data = {
-      phoneNumber: `+${createPhoneNumberValue}`,
+      phoneNumber: createPhoneNumberValue,
       transactionName: 'new account creation', //This is displayed as is in the OTP SMS sent to the phone
     }
+    console.log(data)
     const options = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -62,7 +54,7 @@ function LoginScreen(props) {
     }
     const serverResponse = await fetch(
       `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getOTP`,
-      // `http://192.168.0.150:3001/app/getOTP`,
+      //`http://192.168.0.150:3001/app/getOTP`,
       // `http://nvmservices.ddns.net:3001/app/getOTP`,
       options,
     ).catch((err) => console.log(err))
@@ -142,6 +134,39 @@ function LoginScreen(props) {
     setActiveForm('createAccountOTPForm')
   }
 
+  const createNewAccount = async (e) => {
+    e.preventDefault()
+
+    //New Account Data to upload
+    const newAccountDataToUpload = {
+      emailId: createIdValue,
+      mobileNumber: createPhoneNumberValue,
+      accountPassword: createPasswordValue,
+      requestId: requestId,
+      givenOtp: createAccountOTPValue,
+    }
+
+    console.log(newAccountDataToUpload)
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(newAccountDataToUpload),
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const serverResponse = await fetch(
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/createNewAccount`,
+      // `http://192.168.0.150:3001/app/createNewAccount`,
+      // `http://nvmservices.ddns.net:3001/app/createNewAccount`,
+      options,
+    ).catch((err) => console.log(err))
+    const serverResponseData = await serverResponse.json()
+    console.log(serverResponseData)
+  }
+
   return (
     <div
       className="loginScreenWrapper"
@@ -217,7 +242,7 @@ function LoginScreen(props) {
           <label htmlFor="emailAccountPasswordInput">Mobile Number</label>
           <input
             value={createPhoneNumberValue}
-            type="number"
+            type="text"
             name=""
             id="emailAccountPasswordInput"
             onChange={(e) => {
@@ -242,7 +267,7 @@ function LoginScreen(props) {
         {/* OTP FORM */}
         <form
           className="formContainer"
-          onSubmit={authenticationFormHandler}
+          onSubmit={createNewAccount}
           autoComplete="off"
           style={{ display: createAccountOTPFormStyle }}
         >
@@ -250,13 +275,13 @@ function LoginScreen(props) {
           <p className="error">{statusMessage}&nbsp;</p>
           <label htmlFor="emailAccountPasswordInput">OTP</label>
           <input
-            value={createOTPValue}
+            value={createAccountOTPValue}
             type="number"
             name=""
             id="emailAccountPasswordInput"
             onChange={(e) => {
               setCreateAccountStatusMessage('')
-              setCreateOTPValue(e.target.value)
+              setCreateAccountOTPValue(e.target.value)
             }}
             style={{ textAlign: 'center', letterSpacing: '3px' }}
           />
