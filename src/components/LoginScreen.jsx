@@ -9,10 +9,12 @@ function LoginScreen(props) {
   const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
 
   //Form display state variables
-  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm 3) createAccountOTPFrom
-  const [loginFormStyle, setLoginFormStyle] = useState('block')
+  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm 3) createAccountOTPFrom 4) accountCreationSuccess 5) accountCreationFailure
+  const [loginFormStyle, setLoginFormStyle] = useState('none')
   const [createAccountFormStyle, setCreateAccountFormStyle] = useState('none')
   const [createAccountOTPFormStyle, setCreateAccountOTPFormStyle] = useState('none')
+  const [accountCreationSuccessModalStyle, setAccountCreationSuccessModalStyle] = useState('none')
+  const [accountCreationFailureModalStyle, setAccountCreationFailureModalStyle] = useState('none')
 
   //Login form state variables
   const [statusMessage, setStatusMessage] = useState('') //Message to display upn failed authentication
@@ -68,14 +70,32 @@ function LoginScreen(props) {
       setLoginFormStyle('block')
       setCreateAccountFormStyle('none')
       setCreateAccountOTPFormStyle('none')
+      setAccountCreationSuccessModalStyle('none')
+      setAccountCreationFailureModalStyle('none')
     } else if (activeForm === 'createAccountForm') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('block')
       setCreateAccountOTPFormStyle('none')
+      setAccountCreationSuccessModalStyle('none')
+      setAccountCreationFailureModalStyle('none')
     } else if (activeForm === 'createAccountOTPForm') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('none')
       setCreateAccountOTPFormStyle('block')
+      setAccountCreationSuccessModalStyle('none')
+      setAccountCreationFailureModalStyle('none')
+    } else if (activeForm === 'accountCreationSuccess') {
+      setLoginFormStyle('none')
+      setCreateAccountFormStyle('none')
+      setCreateAccountOTPFormStyle('none')
+      setAccountCreationSuccessModalStyle('block')
+      setAccountCreationFailureModalStyle('none')
+    } else if (activeForm === 'accountCreationFailure') {
+      setLoginFormStyle('none')
+      setCreateAccountFormStyle('none')
+      setCreateAccountOTPFormStyle('none')
+      setAccountCreationSuccessModalStyle('none')
+      setAccountCreationFailureModalStyle('block')
     }
   }, [activeForm])
 
@@ -106,7 +126,8 @@ function LoginScreen(props) {
       }
 
       const serverResponse = await fetch(
-        `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/authenticateAccount`,
+        // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/authenticateAccount`,
+        `http://192.168.0.150:3001/app/authenticateAccount`,
         options,
       ).catch((err) => console.log(err))
       const serverResponseData = await serverResponse.json()
@@ -130,6 +151,19 @@ function LoginScreen(props) {
 
   const getAccountCreationOTP = (e) => { //OTP for account creation
     //Activate OTP Form
+
+    //Input Validation
+    if (createIdValue == '' && createPhoneNumberValue == '') {
+      setCreateAccountStatusMessage('Please fill in all the fields.')
+      return
+    } else if (createIdValue == '') {
+      setCreateAccountStatusMessage('Please provide a mail ID.')
+      return
+    } else if (createPhoneNumberValue == '') {
+      setCreateAccountStatusMessage('Please provide a mobile number.')
+      return
+    }
+
     getOTP()
     setActiveForm('createAccountOTPForm')
   }
@@ -165,6 +199,11 @@ function LoginScreen(props) {
     ).catch((err) => console.log(err))
     const serverResponseData = await serverResponse.json()
     console.log(serverResponseData)
+    if (serverResponseData.otpValidationSuccess == true) {
+      setActiveForm('accountCreationSuccess')
+    } else if (serverResponseData.otpValidationSuccess == false) {
+      setActiveForm('accountCreationFailure')
+    }
   }
 
   return (
@@ -227,7 +266,7 @@ function LoginScreen(props) {
           style={{ display: createAccountFormStyle }}
         >
           <h1 className="mainTitle">Create an Account</h1>
-          <p className="error">{statusMessage}&nbsp;</p>
+          <p className="error">{createAccountStatusMessage}&nbsp;</p>
           <label htmlFor="emailAccountIdInput">Email ID</label>
           <input
             value={createIdValue}
@@ -272,7 +311,7 @@ function LoginScreen(props) {
           style={{ display: createAccountOTPFormStyle }}
         >
           <h1 className="mainTitle">One Time Password</h1>
-          <p className="error">{statusMessage}&nbsp;</p>
+          <p className="error">{createAccountOTPStatusMessage}&nbsp;</p>
           <label htmlFor="emailAccountPasswordInput">OTP</label>
           <input
             value={createAccountOTPValue}
@@ -297,6 +336,34 @@ function LoginScreen(props) {
             <img className="logo" src={Logo} alt="knoWhere" />
           </div>
         </form>
+
+        {/* ACCOUNT CREATION SUCCESS MODAL */}
+        <div
+          className="formContainer"
+          style={{ display: accountCreationSuccessModalStyle }}
+        >
+          <h1 className="mainTitle">Success!</h1>
+          <p>Great! Your account has been created. Login now to set up your account and begin tracking.</p>
+          <button className={`primaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
+            LOGIN
+          </button>
+        </div>
+
+        {/* ACCOUNT CREATION FAILURE MODAL */}
+        <div
+          className="formContainer"
+          style={{ display: accountCreationFailureModalStyle }}
+        >
+          <h1 className="mainTitle">Account Creation Failed!</h1>
+          <p>Your account was not created. Please try again.</p>
+          <button className={`primaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('createAccountForm') }}>
+            TRY AGAIN
+          </button>
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
+            Login with different credentials
+          </button>
+        </div>
+
       </div>
     </div>
   )
