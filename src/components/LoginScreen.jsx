@@ -126,8 +126,8 @@ function LoginScreen(props) {
       }
 
       const serverResponse = await fetch(
-        // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/authenticateAccount`,
-        `http://192.168.0.150:3001/app/authenticateAccount`,
+        `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/authenticateAccount`,
+        // `http://192.168.0.150:3001/app/authenticateAccount`,
         options,
       ).catch((err) => console.log(err))
       const serverResponseData = await serverResponse.json()
