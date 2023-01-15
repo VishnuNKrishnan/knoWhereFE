@@ -46,8 +46,6 @@ function VehicleDetailsBar(props) {
       : setVehicleDetailsBarOuterElementsStyle({})
   }, [detailedInfoToggleStatus])
 
-  //ADD CODE TO MAKE ONLINE/OFFLINE STATUS WORK
-
   useEffect(() => {
     async function getVehicleDetailsAndUpdateUI() {
       const data = {
@@ -64,8 +62,8 @@ function VehicleDetailsBar(props) {
       }
 
       const serverResponse = await fetch(
-        `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getVehicleDetails`,
-        //`http://192.168.0.150:3001/app/getVehicleDetails`,
+        // `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/getVehicleDetails`,
+        `http://192.168.0.150:3001/app/getVehicleDetails`,
         options,
       ).catch((err) => console.log(err))
       const serverResponseData = await serverResponse.json()
@@ -76,6 +74,20 @@ function VehicleDetailsBar(props) {
       setVehicleType(serverResponseData.vehicleType)
       setVehicleGroup(serverResponseData.vehicleGroup)
       setDisplayPictureBase64(serverResponseData.displayPictureBase64)
+
+      //CODE TO MAKE ONLINE/OFFLINE STATUS WORK
+      const currentTimestamp = Date.now()
+      if (serverResponseData.lastOnline && currentTimestamp - serverResponseData.lastOnline < 60000) {
+        setOnlineStatus({
+          class: 'online', //The CSS Class - Online or Offline
+          text: 'online', //The text to be displayed in the UI - Online or Offline
+        })
+      } else {
+        setOnlineStatus({
+          class: 'offline', //The CSS Class - Online or Offline
+          text: 'offline', //The text to be displayed in the UI - Online or Offline
+        })
+      }
     }
     getVehicleDetailsAndUpdateUI()
   }, [])
