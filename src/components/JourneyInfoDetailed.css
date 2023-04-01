@@ -124,7 +124,7 @@
 }
 
 .journeyInfoDetailedContainer .itemCard {
-  width: 180px;
+  width: 160px;
   height: 130px;
   padding: 10px;
   display: flex;
@@ -244,6 +244,17 @@
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: inset 0px 0px 8px 8px rgba(68, 68, 68, 0.2);
+}
+
+@media only screen and (max-width: 409px) {
+  .journeyInfoDetailedContainer .journeyDetailedInfoDPHolder{
+    height: 90px;
+    width: 90px;
+  }
+  .journeyInfoDetailedContainer .journeyDetailedInfoDPHolder .oneDpHolder {
+    height: 90px;
+    width: 90px;
+  }
 }
 
 .journeyInfoDetailedContainer

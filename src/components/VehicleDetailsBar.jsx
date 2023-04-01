@@ -32,6 +32,7 @@ function VehicleDetailsBar(props) {
   const [vehicleType, setVehicleType] = useState('Loading...')
   const [vehicleGroup, setVehicleGroup] = useState('Loading...')
   const [displayPictureBase64, setDisplayPictureBase64] = useState('')
+  const setDriverDPArray = props.setDriverDPArray
   const [speed, setSpeed] = useState(0)
   const [secondsAfterLastContact, setSecondsAfterLastContact] = useState(0) // Used to display online/offline status
   const [isOnline, setIsOnline] = useState(false)
@@ -74,6 +75,7 @@ function VehicleDetailsBar(props) {
       setVehicleType(serverResponseData.vehicleType)
       setVehicleGroup(serverResponseData.vehicleGroup)
       setDisplayPictureBase64(serverResponseData.displayPictureBase64)
+      setDriverDPArray([serverResponseData.displayPictureBase64])
 
       //CODE TO MAKE ONLINE/OFFLINE STATUS WORK
       const currentTimestamp = Date.now()

@@ -27,6 +27,8 @@ function TrackOne(props) {
     setVisitedLocationsListToggleStatus,
   ] = useState(false)
 
+  const [driverDPArray, setDriverDPArray] = useState([]) //Array of driver DPs as base64 strings. This is fetched by the VehicleDetailsBar component, and upadted here using the setDriverDPArray function defined here.
+
   return (
     <div className="TrackOneWrapper">
       <MapHolder />
@@ -42,9 +44,12 @@ function TrackOne(props) {
         setVisitedLocationsListToggleStatus={
           setVisitedLocationsListToggleStatus
         }
+        setDriverDPArray={setDriverDPArray}
       />
 
-      <JourneyInfoDetailed />
+      <JourneyInfoDetailed
+        driverDPArray={driverDPArray}
+      />
     </div>
   )
 }

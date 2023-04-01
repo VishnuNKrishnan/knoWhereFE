@@ -14,7 +14,7 @@ import CloseLogo from '../uiAssets/close.svg'
 
 // Chart.defaults.scale.gridLines.display = false
 
-function JourneyInfoDetailed() {
+function JourneyInfoDetailed(props) {
   const {
     currentVehicleId,
     dataFromDate,
@@ -82,13 +82,13 @@ function JourneyInfoDetailed() {
   useEffect(() => {
     detailedInfoToggleStatus
       ? setJourneyInfoDetailedContainerToggleStatus(
-          //show card if TRUE
-          'journeyInfoDetailedContainerActive',
-        )
+        //show card if TRUE
+        'journeyInfoDetailedContainerActive',
+      )
       : setJourneyInfoDetailedContainerToggleStatus(
-          //hide card if FALSE
-          'journeyInfoDetailedContainerInactive',
-        )
+        //hide card if FALSE
+        'journeyInfoDetailedContainerInactive',
+      )
   }, [detailedInfoToggleStatus])
 
   useEffect(() => {
@@ -188,7 +188,7 @@ function JourneyInfoDetailed() {
           <div
             className="oneDpHolder"
             style={{
-              backgroundImage: `url('https://media-exp1.licdn.com/dms/image/C5103AQGLAnEm40Eb_A/profile-displayphoto-shrink_200_200/0/1571747242352?e=1657152000&v=beta&t=eB8Nrugp68axTdBa6Wr46qbwGw2_BLLLCqYMNQu24Pk')`,
+              backgroundImage: `url('${props.driverDPArray}')`,
             }}
           ></div>
           {/* <div
@@ -234,7 +234,7 @@ function JourneyInfoDetailed() {
           )}
         </div>
         <div className="itemCard">
-          <p className="label">Max. Recorded Speed</p>
+          <p className="label">Max. Speed</p>
           {maxSpeed === null ? (
             <CircularLoader />
           ) : (
