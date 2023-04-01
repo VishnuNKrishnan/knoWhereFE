@@ -93,7 +93,7 @@ function VehicleDetailsBar(props) {
   }, [])
 
   return (
-    <div className="vehicleDetailsBar">
+    <div className={`vehicleDetailsBar ${onlineStatus.text}`}>
       <div className="vehicleDetailsHolder">
         <div
           className="dpHolder"
@@ -113,7 +113,7 @@ function VehicleDetailsBar(props) {
             <span className="driverContactNumber"> | {driverContact}</span>
           </p>
           <p>{textReduce(vehicleType, 25)}</p>
-          <p>{textReduce(vehicleGroup, 25)}</p>
+          <p className='hideOnSmallScreen'>{textReduce(vehicleGroup, 25)}</p>
         </div>
       </div>
 
