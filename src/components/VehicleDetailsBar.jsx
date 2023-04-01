@@ -115,7 +115,7 @@ function VehicleDetailsBar(props) {
             <span className="driverContactNumber"> | {driverContact}</span>
           </p>
           <p>{textReduce(vehicleType, 25)}</p>
-          <p className='hideOnSmallScreen'>{textReduce(vehicleGroup, 25)}</p>
+          <p className=''>{textReduce(vehicleGroup, 25)}</p>
         </div>
       </div>
 
