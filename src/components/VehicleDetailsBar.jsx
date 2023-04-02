@@ -10,7 +10,7 @@ import VehicleDetailsBarInfoBtn from './VehicleDetailsBarInfoBtn'
 import VehicleDetailsBarShareBtn from './VehicleDetailsBarShareBtn'
 import VehicleDetailsBarCloseBtn from './VehicleDetailsBarCloseBtn'
 import VisitedLocationsListSymbol from '../uiAssets/list.svg'
-import { Link } from 'react-router-dom'
+import isToday from '../customModules/isToday'
 
 function VehicleDetailsBar(props) {
   //Setting the context values...
@@ -19,6 +19,7 @@ function VehicleDetailsBar(props) {
     currentVehicleId,
     detailedInfoToggleStatus,
     setDetailedInfoToggleStatus,
+    dataFromDate
   } = useContext(UserContext)
 
   const [onlineStatus, setOnlineStatus] = useState({
@@ -78,24 +79,38 @@ function VehicleDetailsBar(props) {
       setDriverDPArray([serverResponseData.displayPictureBase64])
 
       //CODE TO MAKE ONLINE/OFFLINE STATUS WORK
-      const currentTimestamp = Date.now()
-      if (serverResponseData.lastOnline && currentTimestamp - serverResponseData.lastOnline < 60000) {
-        setOnlineStatus({
-          class: 'online', //The CSS Class - Online or Offline
-          text: 'online', //The text to be displayed in the UI - Online or Offline
-        })
-      } else {
-        setOnlineStatus({
-          class: 'offline', //The CSS Class - Online or Offline
-          text: 'offline', //The text to be displayed in the UI - Online or Offline
-        })
-      }
+      // const currentTimestamp = Date.now()
+      // if (serverResponseData.lastOnline && currentTimestamp - serverResponseData.lastOnline < 60000) {
+      //   setOnlineStatus({
+      //     class: 'online', //The CSS Class - Online or Offline
+      //     text: 'online', //The text to be displayed in the UI - Online or Offline
+      //   })
+      // } else {
+      //   setOnlineStatus({
+      //     class: 'offline', //The CSS Class - Online or Offline
+      //     text: 'offline', //The text to be displayed in the UI - Online or Offline
+      //   })
+      // }
     }
     getVehicleDetailsAndUpdateUI()
   }, [])
 
+  useEffect(() => {
+    if (props.liveOnlineOffline == 'online') {
+      setOnlineStatus({
+        class: 'online', //The CSS Class - Online or Offline
+        text: 'online', //The text to be displayed in the UI - Online or Offline
+      })
+    } else if (props.liveOnlineOffline == 'offline') {
+      setOnlineStatus({
+        class: 'offline', //The CSS Class - Online or Offline
+        text: 'offline', //The text to be displayed in the UI - Online or Offline
+      })
+    }
+  }, [props.liveOnlineOffline])
+
   return (
-    <div className={`vehicleDetailsBar ${onlineStatus.text}`}>
+    <div className={`vehicleDetailsBar ${isToday(dataFromDate) && onlineStatus.text}`}>
       <div className="vehicleDetailsHolder">
         <div
           className="dpHolder"
@@ -106,9 +121,9 @@ function VehicleDetailsBar(props) {
         <div>
           <div className="vehicleNumAndStatus">
             <h1>{licensePlate}</h1>
-            <div className={`onlineStatus ${onlineStatus.class}`}>
+            {isToday(dataFromDate) && <div className={`onlineStatus ${onlineStatus.class}`}>
               <p>{onlineStatus.text}</p>
-            </div>
+            </div>}
           </div>
           <p>
             {driverName}
@@ -119,10 +134,13 @@ function VehicleDetailsBar(props) {
         </div>
       </div>
 
-      <div className="avgSpeedHolder">
-        <p className="avgSpeed">{speed}</p>
-        <p className="avgSpeedUnit">km/h</p>
-      </div>
+      {isToday(dataFromDate) &&
+        <div className="avgSpeedHolder">
+          {/* <p className="avgSpeed">{speed}</p> */}
+          <p className="avgSpeed">{props.liveSpeed}</p>
+          <p className="avgSpeedUnit">km/h</p>
+        </div>
+      }
 
       <div className="actionsHolder">
         <CallDriverBtn
@@ -146,13 +164,17 @@ function VehicleDetailsBar(props) {
           />
         </div>
       </div>
-      <div
-        className="outerAvgSpeedHolder"
-        style={vehicleDetailsBarOuterElementsStyle}
-      >
-        <p className="outerAvgSpeed">{speed}</p>
-        <p className="outerAvgSpeedUnit">km/h</p>
-      </div>
+
+      {isToday(dataFromDate) &&
+        <div
+          className="outerAvgSpeedHolder"
+          style={vehicleDetailsBarOuterElementsStyle}
+        >
+          {/* <p className="outerAvgSpeed">{speed}</p> */}
+          <p className="outerAvgSpeed">{props.liveSpeed}</p>
+          <p className="outerAvgSpeedUnit">km/h</p>
+        </div>
+      }
     </div>
   )
 }

@@ -7,11 +7,12 @@ import { UserContext } from './userContext'
 import dateStringToTimestamp from './customModules/dateStringToTimestamp'
 import getWeekDayLabel from './customModules/getWeekDayLabel'
 import timestampToDateString from './customModules/timestampToDateString'
+import isToday from './customModules/isToday'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [loggedInAccountId, setLoggedInAccountId] = useState('')
-  //const [currentVehicleId, setCurrentVehicleId] = useState('484-lng-52q-452')
+  //const [currentVehicleId, setCurrentVehicleId] = useState('WCQ-975-BCQ-080')
   const [currentVehicleId, setCurrentVehicleId] = useState('')
   const [detailedInfoToggleStatus, setDetailedInfoToggleStatus] = useState(
     false,
@@ -53,10 +54,10 @@ function App() {
     } else {
       setLiveMode(false)
     }
-    console.log(liveMode)
-    console.log(dataFromDate)
-    console.log(today)
-    console.log(dataToDate)
+    // console.log(liveMode)
+    // console.log(dataFromDate)
+    // console.log(today)
+    // console.log(dataToDate)
   }, [dataFromDate, dataToDate])
 
   //--------------------------------------------

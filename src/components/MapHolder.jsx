@@ -6,8 +6,9 @@ import './MapHolder.css'
 import db from '../firebase'
 import { collection, query, onSnapshot, where } from 'firebase/firestore'
 import MapStatusOverlay from './MapStatusOverlay'
+import isToday from '../customModules/isToday'
 
-function MapHolder() {
+function MapHolder(props) {
   //Setting the context values...
   const {
     isLoggedIn,
@@ -84,7 +85,7 @@ function MapHolder() {
           },
         ]}
         polyline={{
-          location: polylineCoordsArray,
+          location: [...polylineCoordsArray, ...props.liveCoords],
           option: {
             strokeColor: 'green',
             strokeThickness: 3,
@@ -92,6 +93,7 @@ function MapHolder() {
           },
         }}
       ></ReactBingmaps>
+      {/* {console.log([...polylineCoordsArray, ...props.liveCoords])} */}
       {hasTravelledOnDate ? (
         mapIsLoading ? (
           <MapStatusOverlay loading={true}></MapStatusOverlay>

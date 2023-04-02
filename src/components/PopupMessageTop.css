@@ -1,0 +1,86 @@
+.popUpMessageHolder{
+    width: calc(100vw - 20px);
+    max-height: 120px;
+    padding: 10px;
+    position: fixed;
+    border-radius: 5px;
+    right: 10px;
+    box-shadow: 0px 0px 5px 5px rgba(68, 68, 68, 0.2);
+    backdrop-filter: blur(5px);
+    z-index: 50;
+    transition: top 0.2s ease-in-out;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+.successPopupTop{
+    /* border: 1px solid rgb(25, 98, 10); */
+    background-color: rgba(61, 206, 51, 0.5);
+}
+  
+.infoPopupTop{
+    /* border: 1px solid rgb(198, 127, 12); */
+    background-color: rgba(205, 205, 39, 0.5);
+}
+    
+.errorPopupTop{
+    /* border: 1px solid rgb(187, 1, 2); */
+    background-color: rgba(131, 0, 0, 0.5);
+}
+
+  @media only screen and (max-width: 490px){
+    .popUpMessageHolder{
+      width: 100vw;
+      right: 0px;
+      border-radius: 0;
+    }
+    .topPopupMessageActive{
+        top: 0;
+    }
+    .topPopupMessageInactive{
+        top: -120px;
+    }
+  }
+
+  @media only screen and (min-width: 491px) and (max-width: 979px){
+    .topPopupMessageActive{
+        top: 15px;
+    }
+    .topPopupMessageInactive{
+        top: -120px;
+    }
+  }
+  
+  @media only screen and (min-width: 980px){
+    .popUpMessageHolder{
+      width: calc(100vw - 455px);
+      right: 130px;
+    }
+    .topPopupMessageActive{
+        top: 15px;
+    }
+    .topPopupMessageInactive{
+        top: -120px;
+    }
+  }
+  
+  .popUpMessageHolder .symbolHolder{
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+
+  .popUpMessageHolder .symbolHolder img{
+    height: 20px;
+  }
+
+.popUpMessageHolder .messageHolder .messageTitle{
+    font-size: 23px;
+    font-weight: 800;
+    color: rgb(23, 23, 23);
+    margin-bottom: 10px;
+}
+.popUpMessageHolder .messageHolder .messageContent{
+    font-weight: 400;
+    color: rgb(23, 23, 23);
+}

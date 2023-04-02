@@ -8,6 +8,7 @@ import db from '../firebase'
 import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore'
 import LoadingBarSlim from './loaders/LoadingBarSlim'
 import getFormattedLocation from '../customModules/getFormattedLocation'
+import isToday from '../customModules/isToday'
 
 function VisitedLocationsList(props) {
   //Setting the context values...
@@ -53,6 +54,20 @@ function VisitedLocationsList(props) {
     }
     fetchVisitedLocationsFromServerAnUpdateOnListHolder()
   }, [dataFromDate, dataToDate])
+
+  //Handle Live Location Data
+  useEffect(() => {
+    if (isToday(dataFromDate)) {
+      const liveUpdateVisitedLocationsList = () => {
+        //const lastlocationOnDisplay = getFormattedLocation(visitedLocationsList[visitedLocationsList.length - 1]).mainLocation
+        //const lastLocationFromLiveFeed = getFormattedLocation(props.liveLocations[props.liveLocations.length - 1].mainLocation)
+        //if (lastlocationOnDisplay != lastLocationFromLiveFeed) {
+        setVisitedLocationsList([...visitedLocationsList, ...props.liveLocations])
+        //}
+      }
+      liveUpdateVisitedLocationsList()
+    }
+  }, [props.liveLocations])
 
   var listHolderToggleClass
   props.visitedLocationsListToggleStatus
