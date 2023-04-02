@@ -121,22 +121,22 @@ function TrackOne(props) {
     }
   }, [socket])
 
-  const connectivityCheck = () => {
-    const timeOutId = setInterval(() => {
-      console.log(`CONNECTIVITY CHECK`)
-      if (Date.now() - liveLastOnlineTimestamp > 30000) {
-        setLiveOnlineOffline('offline')
-        setLiveSpeed('...')
-        console.log(`OFFLINE`)
-      } else {
-        setLiveOnlineOffline('online')
-        console.log(`ONLINE`)
-      }
-    }, 30000)
-  }
-  useEffect(() => {
-    connectivityCheck()
-  }, [])
+  // const connectivityCheck = () => {
+  //   const timeOutId = setInterval(() => {
+  //     console.log(`CONNECTIVITY CHECK`)
+  //     if (Date.now() - liveLastOnlineTimestamp > 30000) {
+  //       setLiveOnlineOffline('offline')
+  //       setLiveSpeed('...')
+  //       console.log(`OFFLINE`)
+  //     } else {
+  //       setLiveOnlineOffline('online')
+  //       console.log(`ONLINE`)
+  //     }
+  //   }, 30000)
+  // }
+  // useEffect(() => {
+  //   connectivityCheck()
+  // }, [])
 
   return (
     <div className="TrackOneWrapper">
