@@ -49,7 +49,7 @@ function TrackOne(props) {
   const [socket, setSocket] = useState(null)
   useEffect(() => {
     if (isToday(dataFromDate)) {// Create a new WebSocket connection when the component mounts
-      const newSocket = new WebSocket('ws://nvmservices.ddns.net:4001')
+      const newSocket = new WebSocket('wss://vehicle-tracking-be-server.herokuapp.com:4001')
       setSocket(newSocket)
       console.log(newSocket)
       // Clean up the WebSocket connection when the component unmounts
