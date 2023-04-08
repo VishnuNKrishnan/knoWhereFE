@@ -70,6 +70,16 @@ function MapHolder(props) {
   }, [dataFromDate, dataToDate]) //re render if dataFromDate or dataToDate changes
   //console.log(polylineCoordsArray)
 
+  //Update journey path when on live mode
+  useEffect(() => {
+    if (props.liveCoords.length > 0) {
+      console.log(polylineCoordsArray)
+      console.log(props.liveCoords)
+      setPolylineCoordsArray([...polylineCoordsArray, ...props.liveCoords])
+      setMapCenter(props.liveCoords[props.liveCoords.length - 1])
+    }
+  }, [props.liveCoords])
+
   return (
     <div className="mapHolder">
       <ReactBingmaps
@@ -85,7 +95,7 @@ function MapHolder(props) {
           },
         ]}
         polyline={{
-          location: [...polylineCoordsArray, ...props.liveCoords],
+          location: polylineCoordsArray,
           option: {
             strokeColor: 'green',
             strokeThickness: 3,

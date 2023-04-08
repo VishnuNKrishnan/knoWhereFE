@@ -49,7 +49,8 @@ function TrackOne(props) {
   const [socket, setSocket] = useState(null)
   useEffect(() => {
     if (isToday(dataFromDate)) {// Create a new WebSocket connection when the component mounts
-      const newSocket = new WebSocket('wss://vehicle-tracking-be-server.herokuapp.com:4001')
+      // const newSocket = new WebSocket('wss://vehicle-tracking-be-server.herokuapp.com:4001')
+      const newSocket = new WebSocket('wss://vehicle-tracking-ws-server.herokuapp.com')
       setSocket(newSocket)
       console.log(newSocket)
       // Clean up the WebSocket connection when the component unmounts
@@ -100,9 +101,11 @@ function TrackOne(props) {
             setPopupUpdateType('overspeedingAlert')
           }
           var newCoords = []
-          liveTrackingData.newCoords.map(obj => {
-            newCoords.push([obj.currentLatitude, obj.currentLongitude])
-          })
+          if (liveTrackingData.newCoords) {
+            liveTrackingData.newCoords.map(obj => {
+              newCoords.push([obj.currentLatitude, obj.currentLongitude])
+            })
+          }
           setLiveCoords([...liveCoords, ...newCoords])
           setLiveOnlineOffline(liveTrackingData.onlineStatus)
           setLiveLastOnlineTimestamp(liveTrackingData.lastOnlineTimestamp)
