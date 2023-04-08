@@ -9,7 +9,7 @@ import CallDriverBtn from './CallDriverBtn'
 import VehicleDetailsBarInfoBtn from './VehicleDetailsBarInfoBtn'
 import VehicleDetailsBarShareBtn from './VehicleDetailsBarShareBtn'
 import VehicleDetailsBarCloseBtn from './VehicleDetailsBarCloseBtn'
-import VisitedLocationsListSymbol from '../uiAssets/list.svg'
+import VisitedLocationsListSymbol from '../uiAssets/landmark.svg'
 import isToday from '../customModules/isToday'
 
 function VehicleDetailsBar(props) {
