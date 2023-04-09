@@ -6,6 +6,7 @@ import landmarkSymbol from '../uiAssets/landmark.svg'
 import weatherOKSymbol from '../uiAssets/weatherOK.svg'
 import weatherBadSymbol from '../uiAssets/weatherBad.svg'
 import speedSymbol from '../uiAssets/speed.svg'
+import capitalizeFirst from '../customModules/capitalizeFirst'
 
 function PopupMessageTop(props) {
 
@@ -15,6 +16,7 @@ function PopupMessageTop(props) {
     const currentWhetherHeadline = props.currentWhetherHeadline ? props.currentWhetherHeadline : ''
     const currentWhetherFull = props.currentWhetherFull ? props.currentWhetherFull : ''
     const currentHeadline = props.currentHeadline ? props.currentHeadline : ''
+    const currentWeatherObject = props.currentWeatherObject ? props.currentWeatherObject : {}
     const currentText = props.currentText ? props.currentText : ''
 
     const [messagePopupType, setMessagePopupType] = useState('infoPopupTop') //Accepted Values: successPopupTop | infoPopupTop | errorPopupTop
@@ -44,9 +46,25 @@ function PopupMessageTop(props) {
         } else if (updateType == 'weatherOKUpdate') {
             props.setUpdateType('')
             setMessagePopupType('successPopupTop')
-            setMessageSymbol(weatherOKSymbol)
-            setMessagePopupHeadline(currentWhetherHeadline)
-            setMessagePopupText(currentWhetherFull)
+            setMessageSymbol(`http://openweathermap.org/img/w/${currentWeatherObject.icon}.png`)
+            setMessagePopupHeadline(`${capitalizeFirst(currentWeatherObject.description)} in ${currentWeatherObject.location}`)
+
+            var visibilityType = 'good'
+            if (currentWeatherObject.visibility <= 1000) {
+                visibilityType = 'very poor'
+            } else if (currentWeatherObject.visibility > 1000 && currentWeatherObject.visibility <= 5000) {
+                visibilityType = 'poor'
+            }
+            else if (currentWeatherObject.visibility > 5000 && currentWeatherObject.visibility <= 7500) {
+                visibilityType = 'moderate'
+            }
+            else if (currentWeatherObject.visibility > 7500 && currentWeatherObject.visibility <= 9000) {
+                visibilityType = 'good'
+            } else {
+                visibilityType = 'very good'
+            }
+            setMessagePopupText(`Visibility is ${visibilityType}, approximately ${currentWeatherObject.visibility / 1000} kms. \nWind speed is ${currentWeatherObject.windSpeed}.`)
+
         } else if (updateType == 'weatherBadUpdate') {
             props.setUpdateType('')
             setMessagePopupType('infoPopupTop')

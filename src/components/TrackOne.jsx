@@ -40,6 +40,9 @@ function TrackOne(props) {
   const [popupCurrentHeadline, setPopupCurrentHeadline] = useState('')
   const [popupCurrentText, setPopupCurrentText] = useState('')
 
+  //Current Weather Data - To display Popup if the value is changed
+  const [currentWeatherObject, setCurrentWeatherObject] = useState({})
+
   // Handle Live Tracking if isToday == true
   const [liveCoords, setLiveCoords] = useState([])
   const [liveSpeed, setLiveSpeed] = useState('...')
@@ -49,7 +52,7 @@ function TrackOne(props) {
   const [socket, setSocket] = useState(null)
   useEffect(() => {
     if (isToday(dataFromDate)) {// Create a new WebSocket connection when the component mounts
-      // const newSocket = new WebSocket('wss://vehicle-tracking-be-server.herokuapp.com:4001')
+      // const newSocket = new WebSocket('ws://192.168.0.150:4002')
       const newSocket = new WebSocket('wss://vehicle-tracking-ws-server.herokuapp.com')
       setSocket(newSocket)
       console.log(newSocket)
@@ -119,6 +122,13 @@ function TrackOne(props) {
             setLiveLocations([...liveLocations, liveTrackingData.location])
             setPopupUpdateType('landmarkUpdate')
           }
+
+          if (liveTrackingData.currentWeather != currentWeatherObject) {
+            setTimeout(() => {
+              setCurrentWeatherObject(liveTrackingData.currentWeather)
+              setPopupUpdateType('weatherOKUpdate')
+            }, 10000) //Settimeout is used to wait for location Popup to disappear before weather update
+          }
         }
       }
     }
@@ -150,6 +160,7 @@ function TrackOne(props) {
         currentPositionFull={currentLocationFull}
         currentWhetherHeadline={'Pleasant Weather here'}
         currentWhetherFull={'Whether is good.'}
+        currentWeatherObject={currentWeatherObject}
         currentHeadline={popupCurrentHeadline}
         currentText={popupCurrentText}
       />

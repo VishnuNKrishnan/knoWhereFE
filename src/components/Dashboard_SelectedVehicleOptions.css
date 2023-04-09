@@ -21,9 +21,31 @@
 .dashboard_selectedVehicleOptionsWrapper .sectionHeading {
   margin: 0 0 15px 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.dashboard_selectedVehicleOptionsWrapper .sectionHeading .backBtn{
+  transform: translate(56px, -20px);
+  z-index: 10;
+  height: 56px;
+  width: 56px;
+  border-bottom-left-radius: 5px;
+  background-color: rgba(113, 113, 113, 0.481);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dashboard_selectedVehicleOptionsWrapper .sectionHeading .backBtn img{
+  margin: 0;
+}
+
+@media only screen and (max-width: 979px) {
+  .dashboard_selectedVehicleOptionsWrapper .sectionHeading .backBtn {
+    transform: translate(40px, -20px);
+  }
 }
 
 .dashboard_selectedVehicleOptionsWrapper .sectionHeading h2 {

@@ -5,6 +5,7 @@ import CircularLoader from './loaders/CircularLoader'
 import BlockLoader from './loaders/BlockLoader'
 import ToggleSwitch from './switches/ToggleSwitch'
 import VerifiedSymbol from '../uiAssets/verified.png'
+import backBtnLogo from '../uiAssets/backBtn.svg'
 
 function Dashboard_SelectedVehicleOptions() {
   const {
@@ -90,6 +91,9 @@ function Dashboard_SelectedVehicleOptions() {
   return (
     <div className="dashboard_selectedVehicleOptionsWrapper">
       <div className="sectionHeading">
+        <div className='backBtn' onClick={() => { setDashboardCurrentScreen('trackOne') }}>
+          <img src={backBtnLogo} alt="Back" />
+        </div>
         <h2>
           {vehicleDetailsObject.licensePlate
             ? vehicleDetailsObject.licensePlate
