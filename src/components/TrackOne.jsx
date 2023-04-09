@@ -123,7 +123,7 @@ function TrackOne(props) {
             setPopupUpdateType('landmarkUpdate')
           }
 
-          if (liveTrackingData.currentWeather != currentWeatherObject) {
+          if (liveTrackingData.currentWeather != currentWeatherObject && liveTrackingData.currentWeather != undefined) {
             setTimeout(() => {
               setCurrentWeatherObject(liveTrackingData.currentWeather)
               setPopupUpdateType('weatherOKUpdate')
