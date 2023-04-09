@@ -60,6 +60,7 @@ function Dashboard_SelectedVehicleOptions() {
   //Run on first load of component
   useEffect(() => {
     collectVehicleDetailsAndUpdateOnUI()
+    document.getElementsByClassName('mainContentHolder')[0].scrollTop = 0
   }, [])
 
   async function removeDriverFromVehicleIDandUpdateOnUI() {
