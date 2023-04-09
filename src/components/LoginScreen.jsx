@@ -8,6 +8,24 @@ import { useEffect } from 'react'
 function LoginScreen(props) {
   const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
 
+  //Wake up BE Server
+  const wakeServer = async () => {
+    const options = {
+      method: 'GET'
+    }
+    const serverResponse = await fetch(
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/wake`,
+      //`http://192.168.0.150:3001/app/getWayPoints`,
+      options,
+    ).catch((err) => console.log(err))
+    const serverResponseData = await serverResponse.json()
+    console.log(serverResponseData)
+  }
+
+  useEffect(() => {
+    wakeServer()
+  }, [])
+
   //Form display state variables
   const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm 3) createAccountOTPFrom 4) accountCreationSuccess 5) accountCreationFailure
   const [loginFormStyle, setLoginFormStyle] = useState('none')
