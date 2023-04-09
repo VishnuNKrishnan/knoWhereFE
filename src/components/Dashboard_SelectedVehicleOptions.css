@@ -31,7 +31,7 @@
   height: 56px;
   width: 56px;
   border-bottom-left-radius: 5px;
-  background-color: rgba(113, 113, 113, 0.481);
+  background-color: rgba(113, 113, 113, 1);
   display: flex;
   justify-content: center;
   align-items: center;
