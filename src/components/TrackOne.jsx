@@ -43,8 +43,12 @@ function TrackOne(props) {
   //Current Weather Data - To display Popup if the value is changed
   const [currentWeatherObject, setCurrentWeatherObject] = useState({})
 
+  const [lastOverspeedingDisplayTimestamp, setLastOverspeedingDisplayTimestamp] = useState(0) //Used to check if more than a minute has passed after the last overspeeding popup was dsplayed. if not, overspeeding popup trigger will be ignored.
+
+
   // Handle Live Tracking if isToday == true
   const [liveCoords, setLiveCoords] = useState([])
+  const [liveHeading, setLiveHeading] = useState(0)
   const [liveSpeed, setLiveSpeed] = useState('...')
   const [liveLocations, setLiveLocations] = useState([])
   const [liveOnlineOffline, setLiveOnlineOffline] = useState(0)
@@ -101,17 +105,25 @@ function TrackOne(props) {
         if (liveTrackingData.type == "liveLocationUpdate") {
           setLiveSpeed(Math.floor(liveTrackingData.speed * 3.6))
           if (Math.floor(liveTrackingData.speed * 3.6) > 120) {
-            setPopupUpdateType('overspeedingAlert')
+            const currentTimestamp = Date.now()
+            console.log(currentTimestamp);
+            console.log(lastOverspeedingDisplayTimestamp);
+            console.log(currentTimestamp - lastOverspeedingDisplayTimestamp);
+            if (currentTimestamp - lastOverspeedingDisplayTimestamp > 300000) { //Find out how long this is
+              setPopupUpdateType('overspeedingAlert') //This triggers the popup
+              setLastOverspeedingDisplayTimestamp(currentTimestamp)
+            }
           }
-          var newCoords = []
-          if (liveTrackingData.newCoords) {
-            liveTrackingData.newCoords.map(obj => {
-              newCoords.push([obj.currentLatitude, obj.currentLongitude])
-            })
-          }
-          setLiveCoords([...liveCoords, ...newCoords])
+          // var newCoords = []
+          // if (liveTrackingData.newCoords) {
+          //   liveTrackingData.newCoords.map(obj => {
+          //     newCoords.push([obj.currentLatitude, obj.currentLongitude])
+          //   })
+          // }
+          setLiveCoords([[liveTrackingData.latitude, liveTrackingData.longitude]])
           setLiveOnlineOffline(liveTrackingData.onlineStatus)
           setLiveLastOnlineTimestamp(liveTrackingData.lastOnlineTimestamp)
+          setLiveHeading(liveTrackingData.heading)
 
           //Trigger location popup if location is updated:
           if (liveTrackingData.liveLocationIsUpdated) {
@@ -166,6 +178,7 @@ function TrackOne(props) {
       />
       <MapHolder
         liveCoords={liveCoords} //only used if live tracking is active
+        liveHeading={liveHeading} //only used if live tracking is active
       />
 
       <VisitedLocationsList

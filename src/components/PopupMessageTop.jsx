@@ -47,23 +47,23 @@ function PopupMessageTop(props) {
             props.setUpdateType('')
             setMessagePopupType('successPopupTop')
             setMessageSymbol(`http://openweathermap.org/img/w/${currentWeatherObject.icon}.png`)
-            setMessagePopupHeadline(`${capitalizeFirst(currentWeatherObject.description)} in ${currentWeatherObject.location}`)
+            setMessagePopupHeadline(`${capitalizeFirst(currentWeatherObject.description)} in ${currentPositionBrief}`)
 
             var visibilityType = 'good'
-            if (currentWeatherObject.visibility <= 1000) {
+            if (currentWeatherObject.visibility <= 750) {
                 visibilityType = 'very poor'
-            } else if (currentWeatherObject.visibility > 1000 && currentWeatherObject.visibility <= 5000) {
+            } else if (currentWeatherObject.visibility > 750 && currentWeatherObject.visibility <= 1000) {
                 visibilityType = 'poor'
             }
-            else if (currentWeatherObject.visibility > 5000 && currentWeatherObject.visibility <= 7500) {
+            else if (currentWeatherObject.visibility > 1000 && currentWeatherObject.visibility <= 3000) {
                 visibilityType = 'moderate'
             }
-            else if (currentWeatherObject.visibility > 7500 && currentWeatherObject.visibility <= 9000) {
+            else if (currentWeatherObject.visibility > 3000 && currentWeatherObject.visibility <= 4500) {
                 visibilityType = 'good'
             } else {
                 visibilityType = 'very good'
             }
-            setMessagePopupText(`Visibility is ${visibilityType}, approximately ${currentWeatherObject.visibility / 1000} kms. \nWind speed is ${currentWeatherObject.windSpeed}.`)
+            setMessagePopupText(`Visibility is ${visibilityType}, approximately ${currentWeatherObject.visibility / 1000} kms. \nWind speed is ${currentWeatherObject.windSpeed} m/s.`)
 
         } else if (updateType == 'weatherBadUpdate') {
             props.setUpdateType('')
@@ -84,6 +84,7 @@ function PopupMessageTop(props) {
             setMessagePopupHeadline('Real Time Tracking Deactivated')
             setMessagePopupText('Real time tracking is now disabled. You are now viewing journey history.')
         } else if (updateType == 'overspeedingAlert') {
+
             props.setUpdateType('')
             setMessagePopupType('errorPopupTop')
             setMessageSymbol(speedSymbol)
