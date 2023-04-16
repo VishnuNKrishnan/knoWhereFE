@@ -21,6 +21,9 @@
   .offline  {
     border-left: 5px solid rgb(189, 0, 0) ;
   }
+  .connecting  {
+    border-left: 5px solid rgb(229, 168, 0) ;
+  }
 }
 
 @media only screen and (max-width: 979px) {
@@ -80,6 +83,15 @@
 
 .vehicleNumAndStatus .offline p {
   color: rgb(189, 0, 0);
+}
+
+.vehicleNumAndStatus .connecting {
+  border: 1px solid rgb(174, 136, 34);
+  background-color: rgba(174, 136, 34, 0.25);
+}
+
+.vehicleNumAndStatus .connecting p{
+  color: rgb(174, 136, 34);
 }
 
 .vehicleDetailsHolder {

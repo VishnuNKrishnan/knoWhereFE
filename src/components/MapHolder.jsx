@@ -52,6 +52,18 @@ function MapHolder(props) {
   //Pushpin Image
   const [pushPinImage, setPushPinImage] = useState(vehicleTop0)
 
+  //Hide default Microsoft Branding
+  useEffect(() => {
+    const leftBranding = document.getElementsByClassName('bm_bottomLeftOverlay')[0]
+    const rightBranding = document.getElementsByClassName('bm_bottomRightOverlay')[0]
+    if (leftBranding != undefined) {
+      leftBranding.style.display = 'none'
+    }
+    if (rightBranding != undefined) {
+      rightBranding.style.display = 'none'
+    }
+  }, [])
+
   useEffect(() => {
     async function fetchWaypointsCoordsFromServerAndUpdateOnMap() {
       setMapIsLoading(true)
@@ -174,6 +186,7 @@ function MapHolder(props) {
         navigationBarMode={'compact'}
         mapTypeId={mapTypeId}
         center={mapCenter}
+        zoom={props.liveZoom}
         const
         pushPins={[
           {

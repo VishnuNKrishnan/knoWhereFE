@@ -63,6 +63,7 @@ function VisitedLocationsList(props) {
         //const lastLocationFromLiveFeed = getFormattedLocation(props.liveLocations[props.liveLocations.length - 1].mainLocation)
         //if (lastlocationOnDisplay != lastLocationFromLiveFeed) {
         setVisitedLocationsList([...visitedLocationsList, ...props.liveLocations])
+
         //}
       }
       liveUpdateVisitedLocationsList()

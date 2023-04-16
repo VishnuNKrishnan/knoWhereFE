@@ -23,8 +23,8 @@ function VehicleDetailsBar(props) {
   } = useContext(UserContext)
 
   const [onlineStatus, setOnlineStatus] = useState({
-    class: 'offline', //The CSS Class - Online or Offline
-    text: 'offline', //The text to be displayed in the UI - Online or Offline
+    class: 'connecting', //The CSS Class - Online or Offline
+    text: 'waiting', //The text to be displayed in the UI - Online or Offline
   })
 
   const [licensePlate, setLicensePlate] = useState('Loading...')
@@ -106,6 +106,11 @@ function VehicleDetailsBar(props) {
         class: 'offline', //The CSS Class - Online or Offline
         text: 'offline', //The text to be displayed in the UI - Online or Offline
       })
+    } else if (props.liveOnlineOffline == 'offline') {
+      setOnlineStatus({
+        class: 'connecting', //The CSS Class - Online or Offline
+        text: 'connecting', //The text to be displayed in the UI - Online or Offline
+      })
     }
   }, [props.liveOnlineOffline])
 
@@ -129,7 +134,7 @@ function VehicleDetailsBar(props) {
             {driverName}
             <span className="driverContactNumber"> | {driverContact}</span>
           </p>
-          <p>{textReduce(vehicleType, 25)}</p>
+          <p>{textReduce(vehicleType.split(',')[0], 17)}</p>
           <p className=''>{textReduce(vehicleGroup, 25)}</p>
         </div>
       </div>

@@ -51,8 +51,9 @@ function TrackOne(props) {
   const [liveHeading, setLiveHeading] = useState(0)
   const [liveSpeed, setLiveSpeed] = useState('...')
   const [liveLocations, setLiveLocations] = useState([])
-  const [liveOnlineOffline, setLiveOnlineOffline] = useState(0)
+  const [liveOnlineOffline, setLiveOnlineOffline] = useState('connecting')
   const [liveLastOnlineTimestamp, setLiveLastOnlineTimestamp] = useState(0)
+  const [liveZoom, setLiveZoom] = useState(13)
   const [socket, setSocket] = useState(null)
   useEffect(() => {
     if (isToday(dataFromDate)) {// Create a new WebSocket connection when the component mounts
@@ -114,12 +115,20 @@ function TrackOne(props) {
               setLastOverspeedingDisplayTimestamp(currentTimestamp)
             }
           }
-          // var newCoords = []
-          // if (liveTrackingData.newCoords) {
-          //   liveTrackingData.newCoords.map(obj => {
-          //     newCoords.push([obj.currentLatitude, obj.currentLongitude])
-          //   })
-          // }
+
+          //Set map zoom level based on vehicle speed
+          if (Math.floor(liveTrackingData.speed * 3.6) >= 0 && Math.floor(liveTrackingData.speed * 3.6) < 60) {
+            setLiveZoom(16)
+          } else if (Math.floor(liveTrackingData.speed * 3.6) >= 60 && Math.floor(liveTrackingData.speed * 3.6) < 90) {
+            setLiveZoom(15)
+          } else if (Math.floor(liveTrackingData.speed * 3.6) >= 90 && Math.floor(liveTrackingData.speed * 3.6) < 110) {
+            setLiveZoom(14)
+          } else if (Math.floor(liveTrackingData.speed * 3.6) >= 110 && Math.floor(liveTrackingData.speed * 3.6) < 130) {
+            setLiveZoom(13)
+          } else if (Math.floor(liveTrackingData.speed * 3.6) > 130) {
+            setLiveZoom(12)
+          }
+
           setLiveCoords([[liveTrackingData.latitude, liveTrackingData.longitude]])
           setLiveOnlineOffline(liveTrackingData.onlineStatus)
           setLiveLastOnlineTimestamp(liveTrackingData.lastOnlineTimestamp)
@@ -179,6 +188,7 @@ function TrackOne(props) {
       <MapHolder
         liveCoords={liveCoords} //only used if live tracking is active
         liveHeading={liveHeading} //only used if live tracking is active
+        liveZoom={liveZoom}
       />
 
       <VisitedLocationsList
