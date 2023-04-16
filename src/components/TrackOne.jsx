@@ -105,11 +105,8 @@ function TrackOne(props) {
 
         if (liveTrackingData.type == "liveLocationUpdate") {
           setLiveSpeed(Math.floor(liveTrackingData.speed * 3.6))
-          if (Math.floor(liveTrackingData.speed * 3.6) > 120) {
+          if (liveTrackingData.overSpeeding == true) {
             const currentTimestamp = Date.now()
-            console.log(currentTimestamp);
-            console.log(lastOverspeedingDisplayTimestamp);
-            console.log(currentTimestamp - lastOverspeedingDisplayTimestamp);
             if (currentTimestamp - lastOverspeedingDisplayTimestamp > 300000) { //Find out how long this is
               setPopupUpdateType('overspeedingAlert') //This triggers the popup
               setLastOverspeedingDisplayTimestamp(currentTimestamp)
