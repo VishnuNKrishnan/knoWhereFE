@@ -57,7 +57,7 @@ function TrackOne(props) {
   const [socket, setSocket] = useState(null)
   useEffect(() => {
     if (isToday(dataFromDate)) {// Create a new WebSocket connection when the component mounts
-      // const newSocket = new WebSocket('ws://192.168.0.150:4002')
+      //const newSocket = new WebSocket('ws://192.168.0.150:4002')
       const newSocket = new WebSocket('wss://vehicle-tracking-ws-server.herokuapp.com')
       setSocket(newSocket)
       console.log(newSocket)
@@ -116,6 +116,10 @@ function TrackOne(props) {
             }
           }
 
+          if (liveTrackingData.onlineStatus == 'offline') {
+            setLiveSpeed('...')
+          }
+
           //Set map zoom level based on vehicle speed
           if (Math.floor(liveTrackingData.speed * 3.6) >= 0 && Math.floor(liveTrackingData.speed * 3.6) < 60) {
             setLiveZoom(16)
@@ -130,7 +134,18 @@ function TrackOne(props) {
           }
 
           setLiveCoords([[liveTrackingData.latitude, liveTrackingData.longitude]])
-          setLiveOnlineOffline(liveTrackingData.onlineStatus)
+          var liveOnlineOfflineTimeOutId = -1
+          if (liveTrackingData.onlineStatus == 'online') {
+            if (liveOnlineOfflineTimeOutId != -1) {
+              clearTimeout(liveOnlineOfflineTimeOutId)
+            }
+            setLiveOnlineOffline('online')
+          } else if (liveTrackingData.onlineStatus == 'offline') {
+            setLiveOnlineOffline('connecting')
+            liveOnlineOfflineTimeOutId = setTimeout(() => {
+              setLiveOnlineOffline('offline')
+            })
+          }
           setLiveLastOnlineTimestamp(liveTrackingData.lastOnlineTimestamp)
           setLiveHeading(liveTrackingData.heading)
 
@@ -155,23 +170,6 @@ function TrackOne(props) {
     }
   }, [socket])
 
-  // const connectivityCheck = () => {
-  //   const timeOutId = setInterval(() => {
-  //     console.log(`CONNECTIVITY CHECK`)
-  //     if (Date.now() - liveLastOnlineTimestamp > 30000) {
-  //       setLiveOnlineOffline('offline')
-  //       setLiveSpeed('...')
-  //       console.log(`OFFLINE`)
-  //     } else {
-  //       setLiveOnlineOffline('online')
-  //       console.log(`ONLINE`)
-  //     }
-  //   }, 30000)
-  // }
-  // useEffect(() => {
-  //   connectivityCheck()
-  // }, [])
-
   return (
     <div className="TrackOneWrapper">
       <PopupMessageTop
@@ -179,8 +177,6 @@ function TrackOne(props) {
         setUpdateType={setPopupUpdateType}
         currentPositionBrief={currentLocationBrief}
         currentPositionFull={currentLocationFull}
-        currentWhetherHeadline={'Pleasant Weather here'}
-        currentWhetherFull={'Whether is good.'}
         currentWeatherObject={currentWeatherObject}
         currentHeadline={popupCurrentHeadline}
         currentText={popupCurrentText}
