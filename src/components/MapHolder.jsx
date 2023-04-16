@@ -186,7 +186,7 @@ function MapHolder(props) {
         navigationBarMode={'compact'}
         mapTypeId={mapTypeId}
         center={mapCenter}
-        zoom={props.liveZoom}
+        zoom={isToday(dataFromDate) ? props.liveZoom : 14}
         const
         pushPins={[
           {
