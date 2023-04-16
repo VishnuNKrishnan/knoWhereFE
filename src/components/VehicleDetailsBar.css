@@ -15,14 +15,17 @@
 }
 
 @media only screen and (max-width: 490px) {
+  .vehicleDetailsBar{
+    border-left: 5px solid rgba(0,0,0,0);
+  }
   .online  {
-    border-left: 5px solid green ;
+    border-left: 5px solid green !important;
   }
   .offline  {
-    border-left: 5px solid rgb(189, 0, 0) ;
+    border-left: 5px solid rgb(189, 0, 0) !important;
   }
   .connecting  {
-    border-left: 5px solid rgb(229, 168, 0) ;
+    border-left: 5px solid rgb(229, 168, 0) !important;
   }
 }
 

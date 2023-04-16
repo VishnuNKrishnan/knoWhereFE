@@ -57,7 +57,7 @@ function TrackOne(props) {
   const [socket, setSocket] = useState(null)
   useEffect(() => {
     if (isToday(dataFromDate)) {// Create a new WebSocket connection when the component mounts
-      //const newSocket = new WebSocket('ws://192.168.0.150:4002')
+      // const newSocket = new WebSocket('ws://192.168.0.150:4002')
       const newSocket = new WebSocket('wss://vehicle-tracking-ws-server.herokuapp.com')
       setSocket(newSocket)
       console.log(newSocket)
@@ -134,18 +134,7 @@ function TrackOne(props) {
           }
 
           setLiveCoords([[liveTrackingData.latitude, liveTrackingData.longitude]])
-          var liveOnlineOfflineTimeOutId = -1
-          if (liveTrackingData.onlineStatus == 'online') {
-            if (liveOnlineOfflineTimeOutId != -1) {
-              clearTimeout(liveOnlineOfflineTimeOutId)
-            }
-            setLiveOnlineOffline('online')
-          } else if (liveTrackingData.onlineStatus == 'offline') {
-            setLiveOnlineOffline('connecting')
-            liveOnlineOfflineTimeOutId = setTimeout(() => {
-              setLiveOnlineOffline('offline')
-            })
-          }
+          setLiveOnlineOffline(liveTrackingData.onlineStatus)
           setLiveLastOnlineTimestamp(liveTrackingData.lastOnlineTimestamp)
           setLiveHeading(liveTrackingData.heading)
 

@@ -106,7 +106,7 @@ function VehicleDetailsBar(props) {
         class: 'offline', //The CSS Class - Online or Offline
         text: 'offline', //The text to be displayed in the UI - Online or Offline
       })
-    } else if (props.liveOnlineOffline == 'offline') {
+    } else if (props.liveOnlineOffline == 'connecting') {
       setOnlineStatus({
         class: 'connecting', //The CSS Class - Online or Offline
         text: 'connecting', //The text to be displayed in the UI - Online or Offline
