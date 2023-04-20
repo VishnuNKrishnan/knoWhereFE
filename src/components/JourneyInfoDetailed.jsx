@@ -17,6 +17,7 @@ import CloseLogo from '../uiAssets/close.svg'
 function JourneyInfoDetailed(props) {
   const {
     currentVehicleId,
+    isGuestTracker,
     dataFromDate,
     dataToDate,
     detailedInfoToggleStatus,
@@ -138,8 +139,8 @@ function JourneyInfoDetailed(props) {
     <div
       className={`journeyInfoDetailedContainer ${journeyInfoDetailedContainerToggleStatus}`}
     >
-      <div className="actionsHolder">
-        <img
+      <div className="actionsHolder" style={{ justifyContent: isGuestTracker ? 'center' : 'space-between' }}>
+        {!isGuestTracker && <img
           src={Previous}
           alt="Previous Day"
           onClick={() => {
@@ -149,14 +150,14 @@ function JourneyInfoDetailed(props) {
             setDataToDate(dateStringToTimestamp(dataToDate, 'previous'))
             setDataToDayLabel(getWeekDayLabel(dataToDate, 'previous'))
           }}
-        />
+        />}
         <div className="dayDetailsHolder">
           <p className="dayLabel">{dataFromDayLabel}</p>
           <p className="date">
             {timestampToDateStringForDisplay(dataFromDate)}
           </p>
         </div>
-        <img
+        {!isGuestTracker && <img
           src={Next}
           alt="Next Day"
           onClick={() => {
@@ -166,7 +167,7 @@ function JourneyInfoDetailed(props) {
             setDataToDate(dateStringToTimestamp(dataToDate, 'next'))
             setDataToDayLabel(getWeekDayLabel(dataToDate, 'next'))
           }}
-        />
+        />}
       </div>
       <div className="figuresContainer">
         <div className="brandingBar">

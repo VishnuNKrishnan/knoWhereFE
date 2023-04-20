@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import './VehicleDetailsBarBtns.css'
-import symbol from '../uiAssets/home.svg'
+import symbol from '../uiAssets/logout.svg'
 import { UserContext } from '../userContext'
 
-function VehicleDetailsBarCloseBtn() {
+function VehicleDetailsBarLogoutBtn() {
+
   const {
     setIsLoggedIn,
     isGuestTracker,
+    setIsGuestTracker,
     homeScreenCurrentScreen,
     setHomeScreenCurrentScreen,
   } = useContext(UserContext)
@@ -14,11 +16,14 @@ function VehicleDetailsBarCloseBtn() {
   return (
     <div
       className="actionBtn"
-      onClick={() => setHomeScreenCurrentScreen('appDashboard')}
+      onClick={() => {
+        setIsGuestTracker(false)
+        setHomeScreenCurrentScreen('loginScreen')
+      }}
     >
       <img src={symbol} alt="Close" />
     </div>
   )
 }
 
-export default VehicleDetailsBarCloseBtn
+export default VehicleDetailsBarLogoutBtn

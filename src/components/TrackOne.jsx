@@ -16,6 +16,7 @@ import getFormattedLocation from '../customModules/getFormattedLocation'
 function TrackOne(props) {
   const {
     isLoggedIn,
+    isGuestTracker,
     dataFromDate,
     setDataFromDate,
     dataToDate,
@@ -23,8 +24,6 @@ function TrackOne(props) {
     currentVehicleId
   } = useContext(UserContext)
 
-  if (!isLoggedIn) {
-  }
   //Visited locations list is an individual component. However, its toggle button is part of the vehicle details bar component, due to ease of CSS styling. Hence, visitedLocationsListIsActive and its set function is declared here - in TrackOne.jsx, the container - and passed into both the components through props.
   const [
     visitedLocationsListToggleStatus,

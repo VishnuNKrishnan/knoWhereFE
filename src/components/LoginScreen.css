@@ -168,11 +168,34 @@ input {
     rgb(61, 79, 59) 100%
   ); */
   color: rgb(84, 122, 0);
-  font-weight: 300;
+  font-weight: 600;
   transition: transform 0.1s ease-in-out;
 }
 
 .secondaryBtn:active {
+  transform: scale(95%);
+}
+
+.tirtiaryBtn {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  /* background: rgb(84, 122, 0);
+  background: linear-gradient(
+    190deg,
+    rgb(132, 140, 115) 0%,
+    rgb(61, 79, 59) 100%
+  ); */
+  color: rgb(84, 122, 0);
+  font-weight: 300;
+  transition: transform 0.1s ease-in-out;
+}
+
+.tirtiaryBtn:active {
   transform: scale(95%);
 }
 

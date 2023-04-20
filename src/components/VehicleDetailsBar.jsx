@@ -11,11 +11,13 @@ import VehicleDetailsBarShareBtn from './VehicleDetailsBarShareBtn'
 import VehicleDetailsBarCloseBtn from './VehicleDetailsBarCloseBtn'
 import VisitedLocationsListSymbol from '../uiAssets/landmark.svg'
 import isToday from '../customModules/isToday'
+import VehicleDetailsBarLogoutBtn from './VehicleDetailsBarLogoutBtn'
 
 function VehicleDetailsBar(props) {
   //Setting the context values...
   const {
     setIsLoggedIn,
+    isGuestTracker,
     currentVehicleId,
     detailedInfoToggleStatus,
     setDetailedInfoToggleStatus,
@@ -41,6 +43,7 @@ function VehicleDetailsBar(props) {
     vehicleDetailsBarOuterElementsStyle,
     setVehicleDetailsBarOuterElementsStyle,
   ] = useState({})
+  const [whatsAppShareUrl, setWhatsAppShareUrl] = useState('')
 
   useEffect(() => {
     detailedInfoToggleStatus
@@ -77,20 +80,8 @@ function VehicleDetailsBar(props) {
       setVehicleGroup(serverResponseData.vehicleGroup)
       setDisplayPictureBase64(serverResponseData.displayPictureBase64)
       setDriverDPArray([serverResponseData.displayPictureBase64])
-
-      //CODE TO MAKE ONLINE/OFFLINE STATUS WORK
-      // const currentTimestamp = Date.now()
-      // if (serverResponseData.lastOnline && currentTimestamp - serverResponseData.lastOnline < 60000) {
-      //   setOnlineStatus({
-      //     class: 'online', //The CSS Class - Online or Offline
-      //     text: 'online', //The text to be displayed in the UI - Online or Offline
-      //   })
-      // } else {
-      //   setOnlineStatus({
-      //     class: 'offline', //The CSS Class - Online or Offline
-      //     text: 'offline', //The text to be displayed in the UI - Online or Offline
-      //   })
-      // }
+      setWhatsAppShareUrl(serverResponseData.trackingIds ? `https://api.whatsapp.com/send?text=Track%20my%20journey%20at:%0A%0Ahttp://nvmservices.ddns.net:3000/?trackingId=${serverResponseData.trackingIds[0].id.replace(' ', '')}%0A%0AUse password: ${serverResponseData.trackingIds[0].trackingPassword}` : ``)
+      console.log(serverResponseData);
     }
     getVehicleDetailsAndUpdateUI()
   }, [])
@@ -152,8 +143,10 @@ function VehicleDetailsBar(props) {
           driverContactNumber={driverContact}
         />
         <VehicleDetailsBarInfoBtn />
-        <VehicleDetailsBarShareBtn />
-        <VehicleDetailsBarCloseBtn />
+        {!isGuestTracker && <VehicleDetailsBarShareBtn
+          whatsAppShareUrl={whatsAppShareUrl}
+        />}
+        {!isGuestTracker ? <VehicleDetailsBarCloseBtn /> : <VehicleDetailsBarLogoutBtn />}
         <div
           className="visitedLocationsListToggleBtn"
           style={vehicleDetailsBarOuterElementsStyle}

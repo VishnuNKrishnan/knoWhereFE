@@ -8,6 +8,7 @@ import dateStringToTimestamp from './customModules/dateStringToTimestamp'
 import getWeekDayLabel from './customModules/getWeekDayLabel'
 import timestampToDateString from './customModules/timestampToDateString'
 import isToday from './customModules/isToday'
+import TrackOne from './components/TrackOne'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -17,6 +18,7 @@ function App() {
   const [detailedInfoToggleStatus, setDetailedInfoToggleStatus] = useState(
     false,
   )
+  const [isGuestTracker, setIsGuestTracker] = useState(false) //For users using Tracking ID
 
   //--------------------
   // Setting Date Values
@@ -86,6 +88,8 @@ function App() {
           value={{
             isLoggedIn,
             setIsLoggedIn,
+            isGuestTracker,
+            setIsGuestTracker,
             loggedInAccountId,
             setLoggedInAccountId,
             currentVehicleId,
@@ -108,7 +112,8 @@ function App() {
             setDetailedInfoToggleStatus,
           }}
         >
-          {isLoggedIn ? <HomeScreen /> : <LoginScreen />}
+          {/* {isLoggedIn ? <HomeScreen /> : <LoginScreen />} */}
+          {isLoggedIn ? <HomeScreen /> : isGuestTracker ? <TrackOne /> : <LoginScreen />}
         </UserContext.Provider>
       </div>
     </Router>

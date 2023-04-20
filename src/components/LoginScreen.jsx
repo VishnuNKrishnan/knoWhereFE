@@ -6,7 +6,20 @@ import { UserContext } from '../userContext'
 import { useEffect } from 'react'
 
 function LoginScreen(props) {
-  const { isLoggedIn, setIsLoggedIn, loggedInAccountId, setLoggedInAccountId } = useContext(UserContext)
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    loggedInAccountId,
+    setLoggedInAccountId,
+    isGuestTracker,
+    setIsGuestTracker,
+    currentVehicleId,
+    setCurrentVehicleId,
+    dataFromDate,
+    setDataFromDate,
+    dataToDate,
+    setDataToDate,
+  } = useContext(UserContext)
 
   //Wake up BE Server
   const wakeServer = async () => {
@@ -27,12 +40,13 @@ function LoginScreen(props) {
   }, [])
 
   //Form display state variables
-  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm 3) createAccountOTPFrom 4) accountCreationSuccess 5) accountCreationFailure
+  const [activeForm, setActiveForm] = useState('loginForm') //AcceptedValues: 1) loginForm 2) createAccountForm 3) createAccountOTPFrom 4) accountCreationSuccess 5) accountCreationFailure 4) trackWithId
   const [loginFormStyle, setLoginFormStyle] = useState('none')
   const [createAccountFormStyle, setCreateAccountFormStyle] = useState('none')
   const [createAccountOTPFormStyle, setCreateAccountOTPFormStyle] = useState('none')
   const [accountCreationSuccessModalStyle, setAccountCreationSuccessModalStyle] = useState('none')
   const [accountCreationFailureModalStyle, setAccountCreationFailureModalStyle] = useState('none')
+  const [trackWithIdFormStyle, setTrackWithIdFormStyle] = useState('none')
 
   //Login form state variables
   const [statusMessage, setStatusMessage] = useState('') //Message to display upn failed authentication
@@ -55,6 +69,11 @@ function LoginScreen(props) {
   const [createAccountOTPStatusMessage, setCreateAccountOTPStatusMessage] = useState('')
   const [createAccountOTPValue, setCreateAccountOTPValue] = useState('')
   const [createAccountOTPSubmitBtnText, setCreateAccountOTPSubmitBtnText] = useState('SUBMIT')
+
+  //Tracking ID State Variables
+  const [trackingId, setTrackingId] = useState('')
+  const [trackingPassword, setTrackingPassword] = useState('')
+  const [trackingIdStatusMessage, setTrackingIdStatusMessage] = useState('')
 
   //Function to call API to generate and send new OTP to phone number
   async function getOTP() {
@@ -90,32 +109,59 @@ function LoginScreen(props) {
       setCreateAccountOTPFormStyle('none')
       setAccountCreationSuccessModalStyle('none')
       setAccountCreationFailureModalStyle('none')
+      setTrackWithIdFormStyle('none')
     } else if (activeForm === 'createAccountForm') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('block')
       setCreateAccountOTPFormStyle('none')
       setAccountCreationSuccessModalStyle('none')
       setAccountCreationFailureModalStyle('none')
+      setTrackWithIdFormStyle('none')
     } else if (activeForm === 'createAccountOTPForm') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('none')
       setCreateAccountOTPFormStyle('block')
       setAccountCreationSuccessModalStyle('none')
       setAccountCreationFailureModalStyle('none')
+      setTrackWithIdFormStyle('none')
     } else if (activeForm === 'accountCreationSuccess') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('none')
       setCreateAccountOTPFormStyle('none')
       setAccountCreationSuccessModalStyle('block')
       setAccountCreationFailureModalStyle('none')
+      setTrackWithIdFormStyle('none')
     } else if (activeForm === 'accountCreationFailure') {
       setLoginFormStyle('none')
       setCreateAccountFormStyle('none')
       setCreateAccountOTPFormStyle('none')
       setAccountCreationSuccessModalStyle('none')
       setAccountCreationFailureModalStyle('block')
+      setTrackWithIdFormStyle('none')
+    } else if (activeForm === 'trackWithId') {
+      setLoginFormStyle('none')
+      setCreateAccountFormStyle('none')
+      setCreateAccountOTPFormStyle('none')
+      setAccountCreationSuccessModalStyle('none')
+      setAccountCreationFailureModalStyle('none')
+      setTrackWithIdFormStyle('block')
     }
   }, [activeForm])
+
+  //Load Tracking ID Form automatically if the url contains tracking ID
+  useEffect(() => {
+    var hasTrackingId = false
+    var trackingId = ''
+    const queryString = window.location.search
+    console.log(queryString);
+    if (queryString.includes('trackingId')) {
+      hasTrackingId = true
+      trackingId = queryString.split('=')[1]
+      console.log(trackingId);
+      setTrackingId(trackingId)
+      setActiveForm('trackWithId')
+    }
+  }, [])
 
   const authenticationFormHandler = async (e) => { //Login Form
     e.preventDefault()
@@ -224,6 +270,41 @@ function LoginScreen(props) {
     }
   }
 
+  const authenticateTrackingId = async (e) => {
+    e.preventDefault()
+
+    const payload = {
+      trackingId: trackingId,
+      password: trackingPassword
+    }
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const serverResponse = await fetch(
+      `${process.env.REACT_APP_API_SERVER_BASE_URL}/app/authenticateTrackingID`,
+      // `http://192.168.0.150:3001/app/authenticateTrackingID`,
+      // `http://nvmservices.ddns.net:3001/app/authenticateTrackingID`,
+      options,
+    ).catch((err) => console.log(err))
+    const serverResponseData = await serverResponse.json()
+    console.log(serverResponseData);
+
+    if (serverResponseData.status == 'success') {
+      setCurrentVehicleId(serverResponseData.vehicleId)
+      setIsGuestTracker(true)
+    } else {
+      setTrackingIdStatusMessage(serverResponseData.message)
+    }
+  }
+
   return (
     <div
       className="loginScreenWrapper"
@@ -267,7 +348,11 @@ function LoginScreen(props) {
             {submitBtnText}
           </button>
 
-          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('createAccountForm') }}>
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('trackWithId') }}>
+            Use Tracking ID
+          </button>
+
+          <button className={`tirtiaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('createAccountForm') }}>
             Create an account
           </button>
 
@@ -381,6 +466,88 @@ function LoginScreen(props) {
             Login with different credentials
           </button>
         </div>
+
+        {/* OTP FORM */}
+        <form
+          className="formContainer"
+          onSubmit={createNewAccount}
+          autoComplete="off"
+          style={{ display: createAccountOTPFormStyle }}
+        >
+          <h1 className="mainTitle">Track with ID</h1>
+          <p className="error">{createAccountOTPStatusMessage}&nbsp;</p>
+          <label htmlFor="emailAccountPasswordInput">OTP</label>
+          <input
+            value={createAccountOTPValue}
+            type="number"
+            name=""
+            id="emailAccountPasswordInput"
+            onChange={(e) => {
+              setCreateAccountStatusMessage('')
+              setCreateAccountOTPValue(e.target.value)
+            }}
+            style={{ textAlign: 'center', letterSpacing: '3px' }}
+          />
+          <button className={`primaryBtn ${loadingClass}`} type="submit">
+            {createAccountOTPSubmitBtnText}
+          </button>
+
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
+            Have an account? Login here.
+          </button>
+
+          <div className="logoHolder">
+            <img className="logo" src={Logo} alt="knoWhere" />
+          </div>
+        </form>
+
+        {/* TRACK WITH ID FORM */}
+        <form
+          className="formContainer"
+          onSubmit={authenticateTrackingId}
+          autoComplete="off"
+          style={{ display: trackWithIdFormStyle }}
+        >
+          <h1 className="mainTitle">Track with ID</h1>
+          <p className="error">{trackingIdStatusMessage}&nbsp;</p>
+          <label htmlFor="emailAccountIdInput">Tracking ID</label>
+          <input
+            value={trackingId}
+            type="text"
+            name=""
+            id="emailAccountIdInput"
+            onChange={(e) => {
+              setStatusMessage('')
+              setTrackingId(e.target.value)
+            }}
+          />
+          <label htmlFor="emailAccountPasswordInput">Tracking Password</label>
+          <input
+            value={trackingPassword}
+            type="password"
+            name=""
+            id="emailAccountPasswordInput"
+            onChange={(e) => {
+              setStatusMessage('')
+              setTrackingPassword(e.target.value)
+            }}
+          />
+          <button className={`primaryBtn ${loadingClass}`} type="submit">
+            TRACK
+          </button>
+
+          <button className={`secondaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('loginForm') }}>
+            Login with Account ID
+          </button>
+
+          <button className={`tirtiaryBtn ${loadingClass}`} type="button" onClick={() => { setActiveForm('createAccountForm') }}>
+            Create an account
+          </button>
+
+          <div className="logoHolder">
+            <img className="logo" src={Logo} alt="knoWhere" />
+          </div>
+        </form>
 
       </div>
     </div>

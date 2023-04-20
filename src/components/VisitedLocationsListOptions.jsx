@@ -9,6 +9,7 @@ import getWeekDayLabel from '../customModules/getWeekDayLabel'
 
 function VisitedLocationsListOptions() {
   const {
+    isGuestTracker,
     dataFromDate,
     setDataFromDate,
     dataToDate,
@@ -19,8 +20,8 @@ function VisitedLocationsListOptions() {
   } = useContext(UserContext)
 
   return (
-    <div className="optionsHolder">
-      <div
+    <div className="optionsHolder" style={{ justifyContent: isGuestTracker ? 'center' : 'space-between' }}>
+      {!isGuestTracker && <div
         className="symbol"
         onClick={() => {
           navigator.vibrate(40)
@@ -31,12 +32,12 @@ function VisitedLocationsListOptions() {
         }}
       >
         <img src={Previous} alt="Previous Date" />
-      </div>
+      </div>}
       <div className="detailsHolderTop">
         <p className="main">{dataFromDayLabel}</p>
         <p className="sub">{timestampToDateStringForDisplay(dataFromDate)}</p>
       </div>
-      <div
+      {!isGuestTracker && <div
         className="symbol"
         onClick={() => {
           navigator.vibrate(40)
@@ -47,7 +48,7 @@ function VisitedLocationsListOptions() {
         }}
       >
         <img src={Next} alt="Next Date" />
-      </div>
+      </div>}
     </div>
   )
 }
