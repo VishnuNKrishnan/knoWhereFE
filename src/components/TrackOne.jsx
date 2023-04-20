@@ -104,13 +104,13 @@ function TrackOne(props) {
 
         if (liveTrackingData.type == "liveLocationUpdate") {
           setLiveSpeed(Math.floor(liveTrackingData.speed * 3.6))
-          if (liveTrackingData.overSpeeding == true) {
-            const currentTimestamp = Date.now()
-            if (currentTimestamp - lastOverspeedingDisplayTimestamp > 300000) { //Find out how long this is
-              setPopupUpdateType('overspeedingAlert') //This triggers the popup
-              setLastOverspeedingDisplayTimestamp(currentTimestamp)
-            }
-          }
+          // if (liveTrackingData.overSpeeding == true) {
+          //   const currentTimestamp = Date.now()
+          //   if (currentTimestamp - lastOverspeedingDisplayTimestamp > 300000) { //Find out how long this is
+          //     setPopupUpdateType('overspeedingAlert') //This triggers the popup
+          //     setLastOverspeedingDisplayTimestamp(currentTimestamp)
+          //   }
+          // }
 
           if (liveTrackingData.onlineStatus == 'offline') {
             setLiveSpeed('...')
@@ -133,23 +133,29 @@ function TrackOne(props) {
           setLiveOnlineOffline(liveTrackingData.onlineStatus)
           setLiveLastOnlineTimestamp(liveTrackingData.lastOnlineTimestamp)
           setLiveHeading(liveTrackingData.heading)
+        }
 
-          //Trigger location popup if location is updated:
-          if (liveTrackingData.liveLocationIsUpdated) {
-            const currentPositionBrief = getFormattedLocation(liveTrackingData.location).mainLocation
-            const currentPositionFull = getFormattedLocation(liveTrackingData.location).subLocation
-            setCurrentLocationBrief(currentPositionBrief)
-            setCurrentLocationFull(currentPositionFull)
-            setLiveLocations([...liveLocations, liveTrackingData.location])
-            setPopupUpdateType('landmarkUpdate')
-          }
+        if (liveTrackingData.type == "locationUpdate") {
+          const currentPositionBrief = getFormattedLocation(liveTrackingData.location).mainLocation
+          const currentPositionFull = getFormattedLocation(liveTrackingData.location).subLocation
+          setCurrentLocationBrief(currentPositionBrief)
+          setCurrentLocationFull(currentPositionFull)
 
-          if (liveTrackingData.currentWeather != currentWeatherObject && liveTrackingData.currentWeather != undefined) {
-            setTimeout(() => {
-              setCurrentWeatherObject(liveTrackingData.currentWeather)
-              setPopupUpdateType('weatherOKUpdate')
-            }, 10000) //Settimeout is used to wait for location Popup to disappear before weather update
+          if (liveLocations.length == 0) {
+            setLiveLocations([liveTrackingData.location])
+          } else {
+            if ((liveLocations[liveLocations.length - 1]).timestampOfVehiclePresence != liveTrackingData.location.timestampOfVehiclePresence) {
+              setLiveLocations([liveTrackingData.location])
+            }
           }
+          setPopupUpdateType('landmarkUpdate')
+        }
+
+        if (liveTrackingData.type == "weatherUpdate") {
+          setTimeout(() => {
+            setCurrentWeatherObject(liveTrackingData.weather)
+            setPopupUpdateType('weatherOKUpdate')
+          }, 10000)
         }
       }
     }
