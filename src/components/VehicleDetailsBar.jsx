@@ -80,7 +80,7 @@ function VehicleDetailsBar(props) {
       setVehicleGroup(serverResponseData.vehicleGroup)
       setDisplayPictureBase64(serverResponseData.displayPictureBase64)
       setDriverDPArray([serverResponseData.displayPictureBase64])
-      setWhatsAppShareUrl(serverResponseData.trackingIds ? `https://api.whatsapp.com/send?text=Track%20my%20journey%20at:%0A%0Ahttp://nvmservices.ddns.net:3000/?trackingId=${serverResponseData.trackingIds[0].id.replace(' ', '')}%0A%0AUse password: ${serverResponseData.trackingIds[0].trackingPassword}` : ``)
+      setWhatsAppShareUrl(serverResponseData.trackingIds ? `https://api.whatsapp.com/send?text=Track%20my%20journey%20at:%0A%0Ahttps://knowherefe.herokuapp.com/?trackingId=${serverResponseData.trackingIds[0].id.replace(' ', '')}%0A%0AUse password: ${serverResponseData.trackingIds[0].trackingPassword}` : ``)
       console.log(serverResponseData);
     }
     getVehicleDetailsAndUpdateUI()
